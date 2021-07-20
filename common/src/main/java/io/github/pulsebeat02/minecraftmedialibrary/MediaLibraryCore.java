@@ -1,5 +1,6 @@
 package io.github.pulsebeat02.minecraftmedialibrary;
 
+import io.github.pulsebeat02.minecraftmedialibrary.analysis.Diagnostic;
 import io.github.pulsebeat02.minecraftmedialibrary.nms.PacketHandler;
 import java.nio.file.Path;
 import org.bukkit.event.Listener;
@@ -41,6 +42,9 @@ public interface MediaLibraryCore {
 
   @NotNull
   Path getVideoPath();
+
+  @NotNull
+  Diagnostic getDiagnostics();
 
   boolean isDisabled();
 

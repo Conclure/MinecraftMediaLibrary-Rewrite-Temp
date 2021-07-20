@@ -1,5 +1,6 @@
 package io.github.pulsebeat02.minecraftmedialibrary;
 
+import io.github.pulsebeat02.minecraftmedialibrary.analysis.Diagnostic;
 import io.github.pulsebeat02.minecraftmedialibrary.analysis.SystemDiagnostics;
 import io.github.pulsebeat02.minecraftmedialibrary.listener.RegistrationListener;
 import io.github.pulsebeat02.minecraftmedialibrary.nms.PacketHandler;
@@ -10,9 +11,11 @@ import io.netty.channel.Channel;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.stream.Stream;
 import org.bukkit.entity.Player;
+import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
@@ -20,8 +23,7 @@ import org.jetbrains.annotations.NotNull;
 public final class MinecraftMediaLibrary implements MediaLibraryCore {
 
   private final Plugin plugin;
-  private final PacketHandler handler;
-  private final SystemDiagnostics diagnostics;
+  private final Diagnostic diagnostics;
   private final Path libraryPath;
   private final Path httpServerPath;
   private final Path dependencyPath;
@@ -30,6 +32,7 @@ public final class MinecraftMediaLibrary implements MediaLibraryCore {
   private final Path audioPath;
   private final Path videoPath;
 
+  private PacketHandler handler;
   private Listener registrationListener;
   private VideoPlayerOption option;
   private boolean disabled;
@@ -72,9 +75,11 @@ public final class MinecraftMediaLibrary implements MediaLibraryCore {
 
     this.option = option;
     this.registrationListener = new RegistrationListener(this);
-    this.handler = NMSReflectionHandler.getNewPacketHandlerInstance();
     this.diagnostics = new SystemDiagnostics(this);
-    if (handler != null) {
+
+    final Optional<PacketHandler> optional = NMSReflectionHandler.getNewPacketHandlerInstance();
+    if (optional.isPresent()) {
+      this.handler = optional.get();
       new TinyProtocol(plugin) {
         @Override
         public Object onPacketOutAsync(
@@ -90,13 +95,17 @@ public final class MinecraftMediaLibrary implements MediaLibraryCore {
       };
     }
 
-
     PluginUsageTips.sendWarningMessage();
     PluginUsageTips.sendPacketCompressionTip();
   }
 
   @Override
-  public void shutdown() {}
+  public void shutdown() {
+    Logger.info("Shutting Down");
+    disabled = true;
+    HandlerList.unregisterAll(registrationListener);
+    Logger.info("Good Bye! :(");
+  }
 
   @Override
   public @NotNull Plugin getPlugin() {
@@ -150,7 +159,7 @@ public final class MinecraftMediaLibrary implements MediaLibraryCore {
 
   @Override
   public boolean isDisabled() {
-    return false;
+    return disabled;
   }
 
   @Override
@@ -166,5 +175,10 @@ public final class MinecraftMediaLibrary implements MediaLibraryCore {
   @Override
   public void setVideoPlayerAlgorithm(@NotNull final VideoPlayerOption option) {
     this.option = option;
+  }
+
+  @Override
+  public @NotNull Diagnostic getDiagnostics() {
+    return diagnostics;
   }
 }

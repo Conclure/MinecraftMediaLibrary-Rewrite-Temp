@@ -3,8 +3,9 @@ package io.github.pulsebeat02.minecraftmedialibrary.reflect;
 import io.github.pulsebeat02.minecraftmedialibrary.Logger;
 import io.github.pulsebeat02.minecraftmedialibrary.nms.PacketHandler;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Optional;
 import org.bukkit.Bukkit;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 public class NMSReflectionHandler {
 
@@ -14,8 +15,8 @@ public class NMSReflectionHandler {
     VERSION = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
   }
 
-  @Nullable
-  public static PacketHandler getNewPacketHandlerInstance() {
+  @NotNull
+  public static Optional<PacketHandler> getNewPacketHandlerInstance() {
     try {
       Logger.info(String.format("Loading NMS Class for Version %s", VERSION));
       final Class<?> clazz =
@@ -23,7 +24,7 @@ public class NMSReflectionHandler {
               String.format(
                   "io.github.pulsebeat02.minecraftmedialibrary.nms.impl.%s.NMSMapPacketIntercepter",
                   VERSION));
-      return (PacketHandler) clazz.getDeclaredConstructor().newInstance();
+      return Optional.of((PacketHandler) clazz.getDeclaredConstructor().newInstance());
     } catch (final ClassNotFoundException
         | InstantiationException
         | IllegalAccessException
@@ -33,7 +34,7 @@ public class NMSReflectionHandler {
           String.format(
               "The Server Version you are using (%s) is not yet supported by MinecraftMediaLibrary! Shutting down due to the Fatal Error",
               VERSION));
-      return null;
+      return Optional.empty();
     }
   }
 }

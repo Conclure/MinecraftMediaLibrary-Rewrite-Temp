@@ -15,7 +15,7 @@ import org.bukkit.Server;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
-public class SystemDiagnostics {
+public class SystemDiagnostics implements Diagnostic {
 
   private final MediaLibraryCore core;
   private final OperatingSystem system;
@@ -120,6 +120,7 @@ public class SystemDiagnostics {
     }
   }
 
+  @Override
   public void debugInformation() {
     final Plugin plugin = core.getPlugin();
     final Server server = plugin.getServer();
