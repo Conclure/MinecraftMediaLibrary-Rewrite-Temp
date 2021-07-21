@@ -5,13 +5,19 @@ import com.google.gson.GsonBuilder;
 
 public class GsonProvider {
 
-  private static final Gson GSON;
+  private static final Gson SIMPLE;
+  private static final Gson PRETTY;
 
   static {
-    GSON = new GsonBuilder().setPrettyPrinting().create();
+    SIMPLE = new Gson();
+    PRETTY = new GsonBuilder().setPrettyPrinting().create();
   }
 
-  public static Gson getGson() {
-    return GSON;
+  public static Gson getSimple() {
+    return SIMPLE;
+  }
+
+  public static Gson getPretty() {
+    return PRETTY;
   }
 }

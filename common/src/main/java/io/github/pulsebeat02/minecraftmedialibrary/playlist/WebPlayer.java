@@ -2,16 +2,15 @@ package io.github.pulsebeat02.minecraftmedialibrary.playlist;
 
 import org.jetbrains.annotations.NotNull;
 
-public interface WebPlayer extends WebPlayerControls {
+public interface WebPlayer extends WebPlayerControls, ExternalUrl {
 
-    @NotNull String getCurrentSong();
+  @NotNull
+  String getCurrentSong();
 
-    @NotNull String getUrl();
+  @NotNull
+  PlaylistType getType();
 
-    @NotNull PlaylistType getType();
+  int getIndex();
 
-    int getIndex();
-
-    void setIndex(final int index);
-
+  void setIndex(final int index);
 }

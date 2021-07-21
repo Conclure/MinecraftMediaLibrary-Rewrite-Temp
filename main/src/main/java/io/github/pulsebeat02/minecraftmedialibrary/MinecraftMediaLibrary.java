@@ -79,7 +79,7 @@ public final class MinecraftMediaLibrary implements MediaLibraryCore {
 
     final Optional<PacketHandler> optional = NMSReflectionHandler.getNewPacketHandlerInstance();
     if (optional.isPresent()) {
-      this.handler = optional.get();
+      this.handler = optional.orElseThrow(AssertionError::new);
       new TinyProtocol(plugin) {
         @Override
         public Object onPacketOutAsync(
