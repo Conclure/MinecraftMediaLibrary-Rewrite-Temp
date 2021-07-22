@@ -12,6 +12,7 @@ import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.nio.file.Path;
 import java.util.Iterator;
+import java.util.Optional;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.FileImageInputStream;
@@ -35,13 +36,14 @@ public final class VideoFrameUtils {
 
   private VideoFrameUtils() {}
 
-  public static int @NotNull [] getBuffer(@NotNull final Path image) {
+  @NotNull
+  public static Optional<int[]> getBuffer(@NotNull final Path image) {
     try {
-      return getBuffer(ImageIO.read(image.toFile()));
+      return Optional.of(getBuffer(ImageIO.read(image.toFile())));
     } catch (final IOException e) {
       e.printStackTrace();
     }
-    return null;
+    return Optional.empty();
   }
 
   public static int @NotNull [] getBuffer(@NotNull final BufferedImage image) {
