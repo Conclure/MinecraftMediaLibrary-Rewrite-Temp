@@ -23,6 +23,7 @@ dependencies {
     compileOnly("org.apache.commons:commons-lang3:3.12.0")
     compileOnly("org.jcodec:jcodec:0.2.5")
     compileOnly("net.dv8tion:JDA:4.3.0_277")
+    compileOnly("com.github.ben-manes.caffeine:caffeine:3.0.3")
 
     api(project(":common"))
 

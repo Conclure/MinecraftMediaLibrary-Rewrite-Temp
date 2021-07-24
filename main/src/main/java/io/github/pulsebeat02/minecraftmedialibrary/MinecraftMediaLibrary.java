@@ -7,8 +7,8 @@ import io.github.pulsebeat02.minecraftmedialibrary.nms.PacketHandler;
 import io.github.pulsebeat02.minecraftmedialibrary.reflect.NMSReflectionHandler;
 import io.github.pulsebeat02.minecraftmedialibrary.reflect.TinyProtocol;
 import io.github.pulsebeat02.minecraftmedialibrary.utility.PluginUsageTips;
+import io.github.pulsebeat02.minecraftmedialibrary.utility.ThrowingConsumer;
 import io.netty.channel.Channel;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
@@ -56,20 +56,14 @@ public final class MinecraftMediaLibrary implements MediaLibraryCore {
     this.imagePath = imagePath;
     this.audioPath = audioPath;
     this.videoPath = videoPath;
+
     Stream.of(libraryPath, dependencyPath, httpServerPath, vlcPath, imagePath, audioPath, videoPath)
         .forEach(
-            p -> {
-              try {
-                Files.createDirectories(p);
-              } catch (IOException e) {
-                plugin
-                    .getLogger()
-                    .log(
-                        Level.SEVERE,
-                        "[MinecraftMediaLibrary]: A severe I/O exception occurred while trying to create library folders!");
-                e.printStackTrace();
-              }
-            });
+            ThrowingConsumer.unchecked(
+                Files::createDirectories,
+                plugin.getLogger(),
+                Level.SEVERE,
+                "[MinecraftMediaLibrary]: A severe I/O exception occurred while trying to create library folders!"));
 
     Logger.init(this);
 
@@ -84,13 +78,13 @@ public final class MinecraftMediaLibrary implements MediaLibraryCore {
         @Override
         public Object onPacketOutAsync(
             final Player player, final Channel channel, final Object packet) {
-          return handler.onPacketInterceptOut(player, packet);
+          return MinecraftMediaLibrary.this.handler.onPacketInterceptOut(player, packet);
         }
 
         @Override
         public Object onPacketInAsync(
             final Player player, final Channel channel, final Object packet) {
-          return handler.onPacketInterceptIn(player, packet);
+          return MinecraftMediaLibrary.this.handler.onPacketInterceptIn(player, packet);
         }
       };
     }
@@ -102,74 +96,24 @@ public final class MinecraftMediaLibrary implements MediaLibraryCore {
   @Override
   public void shutdown() {
     Logger.info("Shutting Down");
-    disabled = true;
-    HandlerList.unregisterAll(registrationListener);
+    this.disabled = true;
+    HandlerList.unregisterAll(this.registrationListener);
     Logger.info("Good Bye! :(");
   }
 
   @Override
   public @NotNull Plugin getPlugin() {
-    return plugin;
+    return this.plugin;
   }
 
   @Override
   public @NotNull PacketHandler getHandler() {
-    return handler;
+    return this.handler;
   }
 
   @Override
   public @NotNull VideoPlayerOption getVideoPlayerAlgorithm() {
-    return option;
-  }
-
-  @Override
-  public @NotNull Path getLibraryPath() {
-    return libraryPath;
-  }
-
-  @Override
-  public @NotNull Path getHttpServerPath() {
-    return httpServerPath;
-  }
-
-  @Override
-  public @NotNull Path getDependencyPath() {
-    return dependencyPath;
-  }
-
-  @Override
-  public @NotNull Path getVlcPath() {
-    return vlcPath;
-  }
-
-  @Override
-  public @NotNull Path getImagePath() {
-    return imagePath;
-  }
-
-  @Override
-  public @NotNull Path getAudioPath() {
-    return audioPath;
-  }
-
-  @Override
-  public @NotNull Path getVideoPath() {
-    return videoPath;
-  }
-
-  @Override
-  public boolean isDisabled() {
-    return disabled;
-  }
-
-  @Override
-  public @NotNull Listener getRegistrationHandler() {
-    return registrationListener;
-  }
-
-  @Override
-  public void setRegistrationHandler(@NotNull final Listener listener) {
-    this.registrationListener = listener;
+    return this.option;
   }
 
   @Override
@@ -178,7 +122,57 @@ public final class MinecraftMediaLibrary implements MediaLibraryCore {
   }
 
   @Override
+  public @NotNull Path getLibraryPath() {
+    return this.libraryPath;
+  }
+
+  @Override
+  public @NotNull Path getHttpServerPath() {
+    return this.httpServerPath;
+  }
+
+  @Override
+  public @NotNull Path getDependencyPath() {
+    return this.dependencyPath;
+  }
+
+  @Override
+  public @NotNull Path getVlcPath() {
+    return this.vlcPath;
+  }
+
+  @Override
+  public @NotNull Path getImagePath() {
+    return this.imagePath;
+  }
+
+  @Override
+  public @NotNull Path getAudioPath() {
+    return this.audioPath;
+  }
+
+  @Override
+  public @NotNull Path getVideoPath() {
+    return this.videoPath;
+  }
+
+  @Override
+  public boolean isDisabled() {
+    return this.disabled;
+  }
+
+  @Override
+  public @NotNull Listener getRegistrationHandler() {
+    return this.registrationListener;
+  }
+
+  @Override
+  public void setRegistrationHandler(@NotNull final Listener listener) {
+    this.registrationListener = listener;
+  }
+
+  @Override
   public @NotNull Diagnostic getDiagnostics() {
-    return diagnostics;
+    return this.diagnostics;
   }
 }

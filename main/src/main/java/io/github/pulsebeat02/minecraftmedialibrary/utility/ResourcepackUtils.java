@@ -19,7 +19,7 @@ public final class ResourcepackUtils {
   }
 
   public static boolean validateResourcepackIcon(@NotNull final Path icon) {
-    return PathUtilities.getName(icon).endsWith(".png");
+    return PathUtils.getName(icon).endsWith(".png");
   }
 
   public static void forceResourcepackLoad(

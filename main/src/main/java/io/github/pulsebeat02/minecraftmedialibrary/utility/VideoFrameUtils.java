@@ -124,7 +124,7 @@ public final class VideoFrameUtils {
   @NotNull
   public static Dimension getDimensions(@NotNull final Path file) throws IOException {
     final Iterator<ImageReader> iter =
-        ImageIO.getImageReadersBySuffix(FilenameUtils.getExtension(PathUtilities.getName(file)));
+        ImageIO.getImageReadersBySuffix(FilenameUtils.getExtension(PathUtils.getName(file)));
     while (iter.hasNext()) {
       final ImageReader reader = iter.next();
       try {
