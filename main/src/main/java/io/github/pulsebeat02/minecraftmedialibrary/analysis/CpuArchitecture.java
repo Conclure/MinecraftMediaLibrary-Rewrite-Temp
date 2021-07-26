@@ -2,7 +2,7 @@ package io.github.pulsebeat02.minecraftmedialibrary.analysis;
 
 import org.jetbrains.annotations.NotNull;
 
-public class CpuArchitecture {
+public class CpuArchitecture implements CpuInfo {
 
   private final String architecture;
   private final boolean bits64;
@@ -12,16 +12,18 @@ public class CpuArchitecture {
     this.bits64 = bits64;
   }
 
-  public String getArchitecture() {
-    return architecture;
+  @Override
+  public @NotNull String getArchitecture() {
+    return this.architecture;
   }
 
+  @Override
   public boolean isBits64() {
-    return bits64;
+    return this.bits64;
   }
 
   @Override
   public String toString() {
-    return String.format("{arch=%s,64bits=%s}", architecture, bits64);
+    return String.format("{arch=%s,64bits=%s}", this.architecture, this.bits64);
   }
 }

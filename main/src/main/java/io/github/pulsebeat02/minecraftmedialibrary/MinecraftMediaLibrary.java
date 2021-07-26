@@ -35,6 +35,7 @@ public final class MinecraftMediaLibrary implements MediaLibraryCore {
   private PacketHandler handler;
   private Listener registrationListener;
   private VideoPlayerOption option;
+  private Path ffmpegExecutable;
   private boolean disabled;
 
   MinecraftMediaLibrary(
@@ -154,6 +155,16 @@ public final class MinecraftMediaLibrary implements MediaLibraryCore {
   @Override
   public @NotNull Path getVideoPath() {
     return this.videoPath;
+  }
+
+  @Override
+  public @NotNull Path getFFmpegPath() {
+    return this.ffmpegExecutable;
+  }
+
+  @Override
+  public void setFFmpegPath(@NotNull final Path path) {
+    this.ffmpegExecutable = path;
   }
 
   @Override

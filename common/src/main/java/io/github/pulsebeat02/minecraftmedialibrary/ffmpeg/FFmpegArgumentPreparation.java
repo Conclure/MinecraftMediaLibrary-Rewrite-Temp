@@ -1,12 +1,10 @@
 package io.github.pulsebeat02.minecraftmedialibrary.ffmpeg;
 
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executor;
-import java.util.function.Consumer;
+import io.github.pulsebeat02.minecraftmedialibrary.MediaLibraryCore;
+import java.util.Collection;
 import org.jetbrains.annotations.NotNull;
 
-public interface FFmpegArgumentPreparation {
+public interface FFmpegArgumentPreparation extends EnhancedExecution {
 
   @NotNull
   FFmpegArgumentPreparation addArgument(@NotNull final String arg);
@@ -28,21 +26,15 @@ public interface FFmpegArgumentPreparation {
   FFmpegArgumentPreparation removeArgument(final int index);
 
   @NotNull
-  List<String> getArguments();
+  FFmpegArgumentPreparation addMultipleArguments(@NotNull final String[] arguments);
+
+  @NotNull
+  FFmpegArgumentPreparation addMultipleArguments(@NotNull final Collection<String> arguments);
+
+  @NotNull
+  MediaLibraryCore getCore();
 
   void clearArguments();
-
-  void execute();
-
-  void executeWithLogging(@NotNull final Consumer<String> logger);
-
-  void executeAsync();
-
-  @NotNull
-  CompletableFuture<Void> executeAsync(@NotNull final Executor executor);
-
-  @NotNull
-  CompletableFuture<Void> executeAsyncWithLogging(@NotNull final Consumer<String> logger);
 
   void onBeforeExecution();
 

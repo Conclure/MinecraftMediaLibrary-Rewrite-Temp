@@ -36,7 +36,7 @@ public class SystemDiagnostics implements Diagnostic {
   private CpuArchitecture getCpuArchitecture() {
     return new CpuArchitecture(
         System.getProperty("os.arch").toLowerCase(Locale.ROOT),
-        system.getOSType() == OSType.WINDOWS
+        this.system.getOSType() == OSType.WINDOWS
             ? System.getenv("ProgramFiles(x86)") != null
             : System.getProperty("os.arch").contains("64"));
   }
@@ -65,55 +65,55 @@ public class SystemDiagnostics implements Diagnostic {
   }
 
   private void initializeDownloadLinks() {
-    if (cpu.isBits64()) {
-      switch (system.getOSType()) {
+    if (this.cpu.isBits64()) {
+      switch (this.system.getOSType()) {
         case WINDOWS:
           Logger.info("Detected Windows 64-bit Operating System");
-          vlcDownloadLink =
+          this.vlcDownloadLink =
               "https://github.com/MinecraftMediaLibrary/VLC-Release-Mirror/raw/master/win64/VLC.zip";
-          ffmpegDownloadLink =
+          this.ffmpegDownloadLink =
               "https://github.com/a-schild/jave2/raw/master/jave-nativebin-win64/src/main/resources/ws/schild/jave/nativebin/ffmpeg-amd64.exe";
           break;
         case LINUX:
-          if (cpu.getArchitecture().contains("arm")) {
+          if (this.cpu.getArchitecture().contains("arm")) {
             Logger.info("Detected Linux ARM 64-bit Operating System");
-            ffmpegDownloadLink =
+            this.ffmpegDownloadLink =
                 "https://github.com/a-schild/jave2/raw/master/jave-nativebin-arm64/src/main/resources/ws/schild/jave/nativebin/ffmpeg-aarch64";
           } else {
             Logger.info("Detected Linux AMD/Intel 64-bit Operating System");
-            ffmpegDownloadLink =
+            this.ffmpegDownloadLink =
                 "https://github.com/a-schild/jave2/raw/master/jave-nativebin-linux64/src/main/resources/ws/schild/jave/nativebin/ffmpeg-amd64";
           }
-          vlcDownloadLink = "N/A";
+          this.vlcDownloadLink = "N/A";
           break;
         case MAC:
-          if (cpu.getArchitecture().contains("amd")) {
+          if (this.cpu.getArchitecture().contains("amd")) {
             Logger.info("Detected MacOS Silicon 64-bit Operating System");
-            vlcDownloadLink =
+            this.vlcDownloadLink =
                 "https://github.com/MinecraftMediaLibrary/VLC-Release-Mirror/raw/master/macos-intel64/VLC.dmg";
           } else {
             Logger.info("Detected MacOS AMD 64-bit Operating System!");
-            vlcDownloadLink =
+            this.vlcDownloadLink =
                 "https://github.com/MinecraftMediaLibrary/VLC-Release-Mirror/raw/master/macos-arm64/VLC.dmg";
           }
-          ffmpegDownloadLink =
+          this.ffmpegDownloadLink =
               "https://github.com/a-schild/jave2/raw/master/jave-nativebin-osx64/src/main/resources/ws/schild/jave/nativebin/ffmpeg-x86_64-osx";
           break;
       }
     } else {
-      switch (system.getOSType()) {
+      switch (this.system.getOSType()) {
         case WINDOWS:
           Logger.info("Detected Windows 32-bit Operating System");
-          vlcDownloadLink =
+          this.vlcDownloadLink =
               "https://github.com/MinecraftMediaLibrary/VLC-Release-Mirror/raw/master/win32/VLC.zip";
-          ffmpegDownloadLink =
+          this.ffmpegDownloadLink =
               "https://github.com/a-schild/jave2/raw/master/jave-nativebin-win32/src/main/resources/ws/schild/jave/nativebin/ffmpeg-x86.exe";
           break;
         case LINUX:
-          if (cpu.getArchitecture().contains("arm")) {
+          if (this.cpu.getArchitecture().contains("arm")) {
             Logger.info("Detected Linux ARM 32-bit Operating System");
-            vlcDownloadLink = "N/A";
-            ffmpegDownloadLink =
+            this.vlcDownloadLink = "N/A";
+            this.ffmpegDownloadLink =
                 "https://github.com/a-schild/jave2/raw/master/jave-nativebin-arm32/src/main/resources/ws/schild/jave/nativebin/ffmpeg-arm";
           }
       }
@@ -122,7 +122,7 @@ public class SystemDiagnostics implements Diagnostic {
 
   @Override
   public void debugInformation() {
-    final Plugin plugin = core.getPlugin();
+    final Plugin plugin = this.core.getPlugin();
     final Server server = plugin.getServer();
     Logger.info("===========================================");
     Logger.info("             DEBUG FILE LOGGERS            ");
@@ -131,13 +131,13 @@ public class SystemDiagnostics implements Diagnostic {
     Logger.info("===========================================");
     Logger.info(String.format("Plugin Name: %s", plugin.getName()));
     Logger.info(String.format("Plugin Description: %s", plugin.getDescription()));
-    Logger.info(String.format("HTTP Server Path: %s", core.getHttpServerPath()));
-    Logger.info(String.format("Video Player Method: %s", core.getVideoPlayerAlgorithm()));
-    Logger.info(String.format("Library Disabled? %s", core.isDisabled()));
-    Logger.info(String.format("Library Path: %s", core.getLibraryPath()));
-    Logger.info(String.format("VLC Path: %s", core.getVlcPath()));
-    Logger.info(String.format("Image Path: %s", core.getImagePath()));
-    Logger.info(String.format("Audio Path: %s", core.getAudioPath()));
+    Logger.info(String.format("HTTP Server Path: %s", this.core.getHttpServerPath()));
+    Logger.info(String.format("Video Player Method: %s", this.core.getVideoPlayerAlgorithm()));
+    Logger.info(String.format("Library Disabled? %s", this.core.isDisabled()));
+    Logger.info(String.format("Library Path: %s", this.core.getLibraryPath()));
+    Logger.info(String.format("VLC Path: %s", this.core.getVlcPath()));
+    Logger.info(String.format("Image Path: %s", this.core.getImagePath()));
+    Logger.info(String.format("Audio Path: %s", this.core.getAudioPath()));
     Logger.info("===========================================");
     Logger.info("             SERVER INFORMATION            ");
     Logger.info("===========================================");
@@ -154,15 +154,40 @@ public class SystemDiagnostics implements Diagnostic {
     Logger.info("===========================================");
     Logger.info("             SYSTEM INFORMATION            ");
     Logger.info("===========================================");
-    Logger.info(String.format("Operating System: %s", system.getOSName()));
-    Logger.info(String.format("Version: %s", system.getVersion()));
-    Logger.info(String.format("Linux Distribution: %s", system.getLinuxDistribution()));
-    Logger.info(String.format("CPU Architecture: %s", cpu.getArchitecture()));
+    Logger.info(String.format("Operating System: %s", this.system.getOSName()));
+    Logger.info(String.format("Version: %s", this.system.getVersion()));
+    Logger.info(String.format("Linux Distribution: %s", this.system.getLinuxDistribution()));
+    Logger.info(String.format("CPU Architecture: %s", this.cpu.getArchitecture()));
     Logger.info("===========================================");
     Logger.info("             INSTALLATION LINKS            ");
     Logger.info("===========================================");
-    Logger.info(String.format("VLC Installation URL: %s", vlcDownloadLink));
-    Logger.info(String.format("FFmpeg Installation URL: %s", ffmpegDownloadLink));
+    Logger.info(String.format("VLC Installation URL: %s", this.vlcDownloadLink));
+    Logger.info(String.format("FFmpeg Installation URL: %s", this.ffmpegDownloadLink));
     Logger.info("===========================================");
+  }
+
+  @Override
+  public @NotNull String getFFmpegUrl() {
+    return this.ffmpegDownloadLink;
+  }
+
+  @Override
+  public @NotNull String getVlcUrl() {
+    return this.vlcDownloadLink;
+  }
+
+  @Override
+  public @NotNull OperatingSystemInfo getSystem() {
+    return this.system;
+  }
+
+  @Override
+  public @NotNull CpuInfo getCpu() {
+    return this.cpu;
+  }
+
+  @Override
+  public @NotNull Collection<Mixer> getSound() {
+    return this.sound;
   }
 }

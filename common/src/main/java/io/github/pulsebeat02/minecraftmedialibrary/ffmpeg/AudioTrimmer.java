@@ -1,7 +1,6 @@
 package io.github.pulsebeat02.minecraftmedialibrary.ffmpeg;
 
-public interface AudioTrimmer {
+public interface AudioTrimmer extends FFmpegArgumentPreparation, IOProvider {
 
-    void trimAudio();
-
+  long getStartTime();
 }

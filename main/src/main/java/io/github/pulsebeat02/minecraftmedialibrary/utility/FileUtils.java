@@ -56,4 +56,8 @@ public final class FileUtils {
       e.printStackTrace();
     }
   }
+
+  public static String getFirstLine(@NotNull final Path file) throws IOException {
+    return Files.lines(file).findFirst().orElseThrow(AssertionError::new);
+  }
 }

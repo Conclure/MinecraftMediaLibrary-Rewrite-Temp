@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.Locale;
 import org.jetbrains.annotations.NotNull;
 
-public class OperatingSystem {
+public class OperatingSystem implements OperatingSystemInfo {
 
   private final String osName;
   private final OSType type;
@@ -38,26 +38,30 @@ public class OperatingSystem {
     return concat.toString();
   }
 
-  public String getOSName() {
-    return osName;
+  @Override
+  public @NotNull String getOSName() {
+    return this.osName;
   }
 
-  public OSType getOSType() {
-    return type;
+  @Override
+  public @NotNull OSType getOSType() {
+    return this.type;
   }
 
-  public String getLinuxDistribution() {
-    return linuxDistro;
+  @Override
+  public @NotNull String getLinuxDistribution() {
+    return this.linuxDistro;
   }
 
-  public String getVersion() {
-    return version;
+  @Override
+  public @NotNull String getVersion() {
+    return this.version;
   }
 
   @Override
   public String toString() {
     return String.format(
         "{os=%s,type=%s,linux-distro=%s}",
-        osName, type.name().toLowerCase(Locale.ROOT), linuxDistro);
+            this.osName, this.type.name().toLowerCase(Locale.ROOT), this.linuxDistro);
   }
 }

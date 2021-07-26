@@ -44,6 +44,11 @@ public interface MediaLibraryCore {
   Path getVideoPath();
 
   @NotNull
+  Path getFFmpegPath();
+
+  void setFFmpegPath(@NotNull final Path path);
+
+  @NotNull
   Diagnostic getDiagnostics();
 
   boolean isDisabled();
