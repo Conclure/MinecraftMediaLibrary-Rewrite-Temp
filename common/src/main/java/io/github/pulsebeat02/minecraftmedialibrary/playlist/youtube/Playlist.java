@@ -1,13 +1,12 @@
 package io.github.pulsebeat02.minecraftmedialibrary.playlist.youtube;
 
-import io.github.pulsebeat02.minecraftmedialibrary.playlist.Album;
 import java.util.Collection;
 import org.jetbrains.annotations.NotNull;
 
-public interface YoutubeVideoPlaylist extends Album {
+public interface Playlist extends YoutubeAlbum {
 
   @NotNull
-  Collection<YoutubeVideoMedia> getVideos();
+  Collection<Video> getVideos();
 
   long getViewCount();
 }

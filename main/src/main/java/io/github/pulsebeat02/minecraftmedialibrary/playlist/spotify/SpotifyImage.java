@@ -2,7 +2,7 @@ package io.github.pulsebeat02.minecraftmedialibrary.playlist.spotify;
 
 import org.jetbrains.annotations.NotNull;
 
-public class SpotifyImage implements SpotifyMediaImage {
+public class SpotifyImage implements Image {
 
   private final String url;
   private final int width;

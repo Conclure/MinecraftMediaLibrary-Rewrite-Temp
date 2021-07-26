@@ -1,11 +1,11 @@
 package io.github.pulsebeat02.minecraftmedialibrary.playlist.youtube;
 
-import io.github.pulsebeat02.minecraftmedialibrary.playlist.ExternalUrl;
 import io.github.pulsebeat02.minecraftmedialibrary.playlist.Identifier;
+import io.github.pulsebeat02.minecraftmedialibrary.playlist.ResourceUrl;
 import java.util.Collection;
 import org.jetbrains.annotations.NotNull;
 
-public interface YoutubeVideoMedia extends ExternalUrl, Identifier {
+public interface Video extends ResourceUrl, Identifier {
 
   @NotNull
   String getLiveUrl();

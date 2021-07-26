@@ -4,6 +4,6 @@ import org.jetbrains.annotations.NotNull;
 
 public interface ChatCallback extends FrameCallback {
 
-    @NotNull String getChatCharacter();
-
+  @NotNull
+  String getChatCharacter();
 }

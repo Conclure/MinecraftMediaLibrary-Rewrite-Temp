@@ -34,19 +34,25 @@ public interface PacketHandler {
       final UUID[] viewers, final int x, final int y, final int z, final int color, final int time);
 
   void displayMaps(
-          final UUID[] viewers,
-          final int map,
-          final int mapWidth,
-          final int mapHeight,
-          final ByteBuffer rgb,
-          final int videoWidth,
-          final int xOffset,
-          final int yOffset);
+      final UUID[] viewers,
+      final int map,
+      final int mapWidth,
+      final int mapHeight,
+      final ByteBuffer rgb,
+      final int videoWidth,
+      final int xOffset,
+      final int yOffset);
 
   void displayMaps(
-          final UUID[] viewers, final int map, final int mapWidth, final int mapHeight, final ByteBuffer rgb, final int videoWidth);
+      final UUID[] viewers,
+      final int map,
+      final int mapWidth,
+      final int mapHeight,
+      final ByteBuffer rgb,
+      final int videoWidth);
 
-  void displayEntities(final UUID[] viewers, final Entity[] entities, final int[] data, final int width);
+  void displayEntities(
+      final UUID[] viewers, final Entity[] entities, final int[] data, final int width);
 
   void registerPlayer(@NotNull final Player player);
 

@@ -5,7 +5,7 @@ import java.nio.file.Path;
 import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
-public class StaticImage implements Image {
+public class StaticImage implements MapImage {
 
   private final MediaLibraryCore core;
   private final List<Integer> maps;
@@ -36,26 +36,26 @@ public class StaticImage implements Image {
 
   @Override
   public @NotNull List<Integer> getMapIDs() {
-    return maps;
+    return this.maps;
   }
 
   @Override
   public @NotNull Path getImagePath() {
-    return image;
+    return this.image;
   }
 
   @Override
   public int getFrameHeight() {
-    return height;
+    return this.height;
   }
 
   @Override
   public int getFrameWidth() {
-    return width;
+    return this.width;
   }
 
   @Override
   public @NotNull MediaLibraryCore getLibrary() {
-    return core;
+    return this.core;
   }
 }

@@ -18,5 +18,6 @@ import static java.lang.annotation.ElementType.TYPE;
 @Target(value = {CONSTRUCTOR, FIELD, LOCAL_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE})
 public @interface Author {
   String[] authors();
+
   String[] emails();
 }

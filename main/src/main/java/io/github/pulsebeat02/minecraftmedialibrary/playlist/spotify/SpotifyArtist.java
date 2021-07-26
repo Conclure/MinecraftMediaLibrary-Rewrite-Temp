@@ -27,17 +27,9 @@ public class SpotifyArtist implements Artist {
             .execute();
   }
 
-  public SpotifyArtist(@NotNull final ArtistSimplified simplified)
+  SpotifyArtist(@NotNull final ArtistSimplified simplified)
       throws IOException, ParseException, SpotifyWebApiException {
-    final String url = simplified.getUri();
-    this.url = url;
-    this.artist =
-        SpotifyProvider.getSpotifyApi()
-            .getArtist(
-                MediaExtractionUtils.getSpotifyID(url)
-                    .orElseThrow(() -> new UnknownArtistException(url)))
-            .build()
-            .execute();
+    this(simplified.getUri());
   }
 
   @Override
@@ -71,7 +63,7 @@ public class SpotifyArtist implements Artist {
   }
 
   @Override
-  public @NotNull SpotifyMediaImage[] getImages() {
+  public @NotNull Image[] getImages() {
     return Arrays.stream(this.artist.getImages())
         .map(image -> new SpotifyImage(image.getUrl(), image.getWidth(), image.getHeight()))
         .toArray(SpotifyImage[]::new);

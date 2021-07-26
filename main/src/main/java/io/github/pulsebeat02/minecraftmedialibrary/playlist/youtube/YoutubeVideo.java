@@ -7,7 +7,7 @@ import io.github.pulsebeat02.minecraftmedialibrary.utility.MediaExtractionUtils;
 import java.util.Collection;
 import org.jetbrains.annotations.NotNull;
 
-public class YoutubeVideo implements YoutubeVideoMedia {
+public class YoutubeVideo implements Video {
 
   private final String url;
   private final VideoDetails details;

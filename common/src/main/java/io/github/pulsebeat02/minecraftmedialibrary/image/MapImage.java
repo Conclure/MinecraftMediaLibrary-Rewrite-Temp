@@ -5,7 +5,7 @@ import java.nio.file.Path;
 import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
-public interface Image {
+public interface MapImage {
 
   void draw();
 

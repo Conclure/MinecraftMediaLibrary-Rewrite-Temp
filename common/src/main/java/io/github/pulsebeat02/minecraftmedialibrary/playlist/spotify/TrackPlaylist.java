@@ -1,16 +1,17 @@
 package io.github.pulsebeat02.minecraftmedialibrary.playlist.spotify;
 
-import io.github.pulsebeat02.minecraftmedialibrary.playlist.Album;
 import java.util.Collection;
 import org.jetbrains.annotations.NotNull;
 
-public interface SpotifyPlaylist extends Album {
+public interface TrackPlaylist extends SpotifyAlbum, FollowerCount {
 
   @NotNull
-  Collection<SpotifyMediaTrack> getTracks();
+  Collection<PlaylistTrack> getTracks();
 
   @NotNull
   String getDescription();
 
-  int getFollowerCount();
+  boolean isCollaborative();
+
+  boolean isPubliclyAccessible();
 }

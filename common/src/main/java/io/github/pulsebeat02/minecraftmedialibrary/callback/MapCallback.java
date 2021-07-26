@@ -5,8 +5,8 @@ import org.jetbrains.annotations.NotNull;
 
 public interface MapCallback extends FrameCallback {
 
-    long getMapId();
+  long getMapId();
 
-    @NotNull DitherAlgorithm getAlgorithm();
-
+  @NotNull
+  DitherAlgorithm getAlgorithm();
 }

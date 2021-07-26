@@ -2,18 +2,17 @@ package io.github.pulsebeat02.minecraftmedialibrary.playlist;
 
 public interface WebPlayerControls {
 
-    void skipSong();
+  void skipSong();
 
-    void previousSong();
+  void previousSong();
 
-    void pauseSong();
+  void pauseSong();
 
-    void resumeSong();
+  void resumeSong();
 
-    void seekToTime(final int seconds);
+  void seekToTime(final int seconds);
 
-    void randomize();
+  void randomize();
 
-    void loopMode(final boolean mode);
-
+  void loopMode(final boolean mode);
 }

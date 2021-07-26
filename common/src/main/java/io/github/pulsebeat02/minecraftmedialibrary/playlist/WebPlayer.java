@@ -2,7 +2,7 @@ package io.github.pulsebeat02.minecraftmedialibrary.playlist;
 
 import org.jetbrains.annotations.NotNull;
 
-public interface WebPlayer extends WebPlayerControls, ExternalUrl {
+public interface WebPlayer extends WebPlayerControls, ResourceUrl {
 
   @NotNull
   String getCurrentSong();

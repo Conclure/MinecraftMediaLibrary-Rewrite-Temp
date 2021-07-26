@@ -1,7 +1,6 @@
 package io.github.pulsebeat02.minecraftmedialibrary.playlist.spotify;
 
 import com.wrapper.spotify.exceptions.SpotifyWebApiException;
-import com.wrapper.spotify.model_objects.specification.Track;
 import io.github.pulsebeat02.minecraftmedialibrary.sneaky.ThrowingFunction;
 import io.github.pulsebeat02.minecraftmedialibrary.throwable.DeadResourceLinkException;
 import io.github.pulsebeat02.minecraftmedialibrary.utility.MediaExtractionUtils;
@@ -13,10 +12,10 @@ import java.util.stream.Collectors;
 import org.apache.hc.core5.http.ParseException;
 import org.jetbrains.annotations.NotNull;
 
-public class SpotifyTrack implements SpotifyMediaTrack {
+public class SpotifyTrack implements Track {
 
   private final String url;
-  private final Track track;
+  private final com.wrapper.spotify.model_objects.specification.Track track;
 
   public SpotifyTrack(@NotNull final String url)
       throws IOException, ParseException, SpotifyWebApiException {

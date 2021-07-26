@@ -1,0 +1,28 @@
+package io.github.pulsebeat02.minecraftmedialibrary.playlist.spotify;
+
+import java.util.Date;
+import org.jetbrains.annotations.NotNull;
+
+public class SpotifyPlaylistTrack implements PlaylistTrack {
+
+  private final com.wrapper.spotify.model_objects.specification.PlaylistTrack track;
+
+  SpotifyPlaylistTrack(@NotNull final com.wrapper.spotify.model_objects.specification.PlaylistTrack track) {
+    this.track = track;
+  }
+
+  @Override
+  public @NotNull Date getDateAdded() {
+    return this.track.getAddedAt();
+  }
+
+  @Override
+  public @NotNull User getWhoAdded() {
+    return new SpotifyUser(this.track.getAddedBy());
+  }
+
+  @Override
+  public boolean isLocal() {
+    return this.track.getIsLocal();
+  }
+}
