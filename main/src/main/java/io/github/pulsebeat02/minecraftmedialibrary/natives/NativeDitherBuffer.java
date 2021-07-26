@@ -2,7 +2,7 @@ package io.github.pulsebeat02.minecraftmedialibrary.natives;
 
 import java.nio.ByteBuffer;
 
-public class NativeDitherBuffer {
+public final class NativeDitherBuffer {
 
   static {
     System.loadLibrary("filterlite-dither");

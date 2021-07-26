@@ -5,7 +5,7 @@ import io.github.pulsebeat02.minecraftmedialibrary.playlist.Identifier;
 import java.util.Collection;
 import org.jetbrains.annotations.NotNull;
 
-public interface YoutubeVideo extends ExternalUrl, Identifier {
+public interface YoutubeVideoMedia extends ExternalUrl, Identifier {
 
   @NotNull
   String getLiveUrl();

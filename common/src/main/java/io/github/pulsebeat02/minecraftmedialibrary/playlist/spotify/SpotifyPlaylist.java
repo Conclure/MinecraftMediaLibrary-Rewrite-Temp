@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 public interface SpotifyPlaylist extends Album {
 
   @NotNull
-  Collection<SpotifyTrack> getTracks();
+  Collection<SpotifyMediaTrack> getTracks();
 
   @NotNull
   String getDescription();

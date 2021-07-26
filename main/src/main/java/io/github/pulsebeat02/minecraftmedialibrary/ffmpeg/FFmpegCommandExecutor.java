@@ -18,6 +18,7 @@ public class FFmpegCommandExecutor implements FFmpegArgumentPreparation {
 
   private final MediaLibraryCore core;
   private final List<String> arguments;
+  private boolean completion;
 
   public FFmpegCommandExecutor(@NotNull final MediaLibraryCore core) {
     this.core = core;
@@ -116,6 +117,7 @@ public class FFmpegCommandExecutor implements FFmpegArgumentPreparation {
     } catch (final IOException e) {
       e.printStackTrace();
     }
+    this.completion = true;
     onAfterExecution();
   }
 
@@ -146,6 +148,11 @@ public class FFmpegCommandExecutor implements FFmpegArgumentPreparation {
 
   @Override
   public void onAfterExecution() {}
+
+  @Override
+  public boolean isCompleted() {
+    return this.completion;
+  }
 
   public @NotNull List<String> getArguments() {
     return this.arguments;

@@ -13,7 +13,7 @@ import java.util.Collection;
 import java.util.Collections;
 import org.jetbrains.annotations.NotNull;
 
-public class JarLoader {
+public final class JarLoader {
 
   private final Collection<URL> urls;
 

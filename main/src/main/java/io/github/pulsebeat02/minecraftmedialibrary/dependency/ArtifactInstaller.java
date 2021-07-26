@@ -1,11 +1,11 @@
 package io.github.pulsebeat02.minecraftmedialibrary.dependency;
 
 import io.github.pulsebeat02.minecraftmedialibrary.Logger;
+import io.github.pulsebeat02.minecraftmedialibrary.sneaky.ThrowingConsumer;
 import io.github.pulsebeat02.minecraftmedialibrary.utility.DependencyUtils;
 import io.github.pulsebeat02.minecraftmedialibrary.utility.FileUtils;
 import io.github.pulsebeat02.minecraftmedialibrary.utility.HashingUtils;
 import io.github.pulsebeat02.minecraftmedialibrary.utility.PathUtils;
-import io.github.pulsebeat02.minecraftmedialibrary.utility.ThrowingConsumer;
 import io.github.slimjar.relocation.RelocationRule;
 import io.github.slimjar.relocation.facade.JarRelocatorFacadeFactory;
 import io.github.slimjar.relocation.facade.ReflectiveJarRelocatorFacadeFactory;
@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.jetbrains.annotations.NotNull;
 
-public class ArtifactInstaller {
+public final class ArtifactInstaller {
 
   private static final ExecutorService EXECUTOR_SERVICE;
   private static final List<RelocationRule> RELOCATION_RULES;

@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 public interface YoutubeVideoPlaylist extends Album {
 
   @NotNull
-  Collection<YoutubeVideo> getVideos();
+  Collection<YoutubeVideoMedia> getVideos();
 
   long getViewCount();
 }

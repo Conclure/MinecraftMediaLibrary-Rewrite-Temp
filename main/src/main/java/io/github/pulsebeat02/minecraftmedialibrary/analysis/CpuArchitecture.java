@@ -2,7 +2,7 @@ package io.github.pulsebeat02.minecraftmedialibrary.analysis;
 
 import org.jetbrains.annotations.NotNull;
 
-public class CpuArchitecture implements CpuInfo {
+public final class CpuArchitecture implements CpuInfo {
 
   private final String architecture;
   private final boolean bits64;

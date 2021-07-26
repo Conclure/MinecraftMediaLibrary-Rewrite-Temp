@@ -7,7 +7,7 @@ import java.util.Optional;
 import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
 
-public class NMSReflectionHandler {
+public final class NMSReflectionHandler {
 
   public static final String VERSION;
 

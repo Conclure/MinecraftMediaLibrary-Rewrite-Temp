@@ -14,7 +14,6 @@ import org.jetbrains.annotations.NotNull;
 
 public final class ForcefulResourcepackListener implements Listener {
 
-  private final Plugin plugin;
   private final Set<UUID> uuids;
   private final String url;
   private final byte[] hash;
@@ -24,7 +23,6 @@ public final class ForcefulResourcepackListener implements Listener {
           @NotNull final Set<UUID> uuids,
           @NotNull final String url,
           final byte @NotNull [] hash) {
-    this.plugin = plugin;
     this.uuids = uuids;
     this.url = url;
     this.hash = hash;
@@ -33,12 +31,12 @@ public final class ForcefulResourcepackListener implements Listener {
   }
 
   private void sendResourcepack() {
-    for (final UUID uuid : uuids) {
+    for (final UUID uuid : this.uuids) {
       final Player player = Bukkit.getPlayer(uuid);
       if (player != null) {
-        player.setResourcePack(url, hash);
+        player.setResourcePack(this.url, this.hash);
       } else {
-        Logger.info(String.format("Could not set the resourcepack for %s! (%s)", uuid, url));
+        Logger.info(String.format("Could not set the resourcepack for %s! (%s)", uuid, this.url));
       }
     }
   }
@@ -47,9 +45,9 @@ public final class ForcefulResourcepackListener implements Listener {
     new BukkitRunnable() {
       @Override
       public void run() {
-        if (!uuids.isEmpty()) {
+        if (!ForcefulResourcepackListener.this.uuids.isEmpty()) {
           Logger.info(
-              String.format("Could not force all players to load resourcepack! (%s)", uuids));
+              String.format("Could not force all players to load resourcepack! (%s)", ForcefulResourcepackListener.this.uuids));
           PlayerResourcePackStatusEvent.getHandlerList().unregister(plugin);
         }
       }
@@ -60,18 +58,18 @@ public final class ForcefulResourcepackListener implements Listener {
   public void onResourcepackStatus(final PlayerResourcePackStatusEvent event) {
     final Player player = event.getPlayer();
     final UUID uuid = player.getUniqueId();
-    if (!uuids.contains(uuid)) {
+    if (!this.uuids.contains(uuid)) {
       return;
     }
     switch (event.getStatus()) {
       case FAILED_DOWNLOAD:
-        player.setResourcePack(url, hash);
+        player.setResourcePack(this.url, this.hash);
         break;
       case DECLINED:
       case SUCCESSFULLY_LOADED:
       case ACCEPTED:
-        uuids.remove(uuid);
-        if (uuids.isEmpty()) {
+        this.uuids.remove(uuid);
+        if (this.uuids.isEmpty()) {
           PlayerResourcePackStatusEvent.getHandlerList().unregister(this);
         }
         break;

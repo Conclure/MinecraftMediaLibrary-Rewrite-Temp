@@ -7,7 +7,7 @@ public enum DependencyInfo {
   VLCJ_NATIVES("uk{}co{}caprica", "vlcj-natives", "4{}1{}0", Repositories.MAVEN),
   VLCJ_NATIVE_STREAMS("uk{}co{}caprica", "native-streams", "1{}0{}0", Repositories.MAVEN),
   YOUTUBE_DOWNLOADER(
-      "com{}github{}sealedtx", "java-youtube-downloader", "2{}5{}2", Repositories.JITPACK),
+      "com{}github{}sealedtx", "java-youtube-downloader", "3{}0{}1", Repositories.JITPACK),
   JAVE_CORE("ws{}schild", "jave-core", "3{}1{}1", Repositories.MAVEN),
   COMMONS_COMPRESSION("org{}apache{}commons", "commons-compress", "1{}20", Repositories.MAVEN),
   COMPRESSION("com{}github{}PulseBeat02", "jarchivelib", "master-SNAPSHOT", Repositories.JITPACK),

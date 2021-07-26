@@ -7,7 +7,7 @@ dependencies {
     compileOnly("uk.co.caprica:vlcj:4.7.1")
     compileOnly("uk.co.caprica:vlcj-natives:4.1.0")
     compileOnly("uk.co.caprica:native-streams:1.0.0")
-    compileOnly("com.github.sealedtx:java-youtube-downloader:2.5.2")
+    compileOnly("com.github.sealedtx:java-youtube-downloader:3.0.1")
     compileOnly("ws.schild:jave-core:3.1.1")
     compileOnly("io.netty:netty-all:5.0.0.Alpha2")
     compileOnly("com.mojang:authlib:1.5.25")

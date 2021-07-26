@@ -6,8 +6,8 @@ import io.github.pulsebeat02.minecraftmedialibrary.listener.RegistrationListener
 import io.github.pulsebeat02.minecraftmedialibrary.nms.PacketHandler;
 import io.github.pulsebeat02.minecraftmedialibrary.reflect.NMSReflectionHandler;
 import io.github.pulsebeat02.minecraftmedialibrary.reflect.TinyProtocol;
+import io.github.pulsebeat02.minecraftmedialibrary.sneaky.ThrowingConsumer;
 import io.github.pulsebeat02.minecraftmedialibrary.utility.PluginUsageTips;
-import io.github.pulsebeat02.minecraftmedialibrary.utility.ThrowingConsumer;
 import io.netty.channel.Channel;
 import java.nio.file.Files;
 import java.nio.file.Path;

@@ -19,7 +19,7 @@ import java.util.stream.Stream;
 import org.apache.commons.io.FilenameUtils;
 import org.jetbrains.annotations.NotNull;
 
-public class FFmpegInstaller {
+public final class FFmpegInstaller {
 
   private final MediaLibraryCore core;
   private final Path folder;

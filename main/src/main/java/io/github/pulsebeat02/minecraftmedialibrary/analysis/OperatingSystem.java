@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.Locale;
 import org.jetbrains.annotations.NotNull;
 
-public class OperatingSystem implements OperatingSystemInfo {
+public final class OperatingSystem implements OperatingSystemInfo {
 
   private final String osName;
   private final OSType type;

@@ -48,15 +48,15 @@ public class AudioAttributes implements AudioConfiguration {
       return false;
     }
     final AudioAttributes setting = (AudioAttributes) obj;
-    return setting.getBitrate() == bitrate
-        && setting.getChannels() == channels
-        && setting.getSamplingRate() == samplingRate
-        && setting.getVolume() == volume;
+    return setting.getBitrate() == this.bitrate
+        && setting.getChannels() == this.channels
+        && setting.getSamplingRate() == this.samplingRate
+        && setting.getVolume() == this.volume;
   }
 
   @Override
   public int getBitrate() {
-    return bitrate;
+    return this.bitrate;
   }
 
   @Override
@@ -66,7 +66,7 @@ public class AudioAttributes implements AudioConfiguration {
 
   @Override
   public int getChannels() {
-    return channels;
+    return this.channels;
   }
 
   @Override
@@ -76,7 +76,7 @@ public class AudioAttributes implements AudioConfiguration {
 
   @Override
   public int getSamplingRate() {
-    return samplingRate;
+    return this.samplingRate;
   }
 
   @Override
@@ -86,7 +86,7 @@ public class AudioAttributes implements AudioConfiguration {
 
   @Override
   public String getCodec() {
-    return codec;
+    return this.codec;
   }
 
   @Override
@@ -96,7 +96,7 @@ public class AudioAttributes implements AudioConfiguration {
 
   @Override
   public int getVolume() {
-    return volume;
+    return this.volume;
   }
 
   @Override
@@ -106,7 +106,7 @@ public class AudioAttributes implements AudioConfiguration {
 
   @Override
   public int getStartTime() {
-    return start;
+    return this.start;
   }
 
   @Override

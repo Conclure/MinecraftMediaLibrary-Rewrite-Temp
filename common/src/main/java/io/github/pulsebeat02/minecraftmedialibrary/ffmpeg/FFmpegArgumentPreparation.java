@@ -39,4 +39,6 @@ public interface FFmpegArgumentPreparation extends EnhancedExecution {
   void onBeforeExecution();
 
   void onAfterExecution();
+
+  boolean isCompleted();
 }

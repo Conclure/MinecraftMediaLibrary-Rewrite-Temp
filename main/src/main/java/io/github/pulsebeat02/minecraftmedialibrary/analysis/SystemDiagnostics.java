@@ -15,7 +15,7 @@ import org.bukkit.Server;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
-public class SystemDiagnostics implements Diagnostic {
+public final class SystemDiagnostics implements Diagnostic {
 
   private final MediaLibraryCore core;
   private final OperatingSystem system;

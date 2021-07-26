@@ -3,7 +3,7 @@ package io.github.pulsebeat02.minecraftmedialibrary.json;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-public class GsonProvider {
+public final class GsonProvider {
 
   private static final Gson SIMPLE;
   private static final Gson PRETTY;
