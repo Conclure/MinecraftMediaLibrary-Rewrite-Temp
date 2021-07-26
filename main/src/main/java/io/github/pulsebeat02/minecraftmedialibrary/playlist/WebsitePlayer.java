@@ -4,9 +4,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class WebsitePlayer implements WebPlayer {
 
-
-
-
   @Override
   public @NotNull String getUrl() {
     return null;

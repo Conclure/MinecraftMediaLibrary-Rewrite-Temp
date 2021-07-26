@@ -62,6 +62,6 @@ public final class OperatingSystem implements OperatingSystemInfo {
   public String toString() {
     return String.format(
         "{os=%s,type=%s,linux-distro=%s}",
-            this.osName, this.type.name().toLowerCase(Locale.ROOT), this.linuxDistro);
+        this.osName, this.type.name().toLowerCase(Locale.ROOT), this.linuxDistro);
   }
 }

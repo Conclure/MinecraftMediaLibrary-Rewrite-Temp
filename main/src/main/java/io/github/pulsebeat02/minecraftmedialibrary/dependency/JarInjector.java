@@ -19,7 +19,7 @@ public final class JarInjector implements DependencyInjector {
 
   @Override
   public void inject(@NotNull final Injectable injectable, @NotNull final DependencyData data) {
-      this.dependencies.forEach(
+    this.dependencies.forEach(
         x -> {
           try {
             injectable.inject(x);

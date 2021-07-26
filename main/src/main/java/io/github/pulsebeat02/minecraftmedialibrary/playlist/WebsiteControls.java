@@ -12,7 +12,7 @@ public class WebsiteControls implements WebPlayerControls {
 
   public WebsiteControls(final String url, @NotNull final PlaylistType type) {
     this.url = url;
-      this.songs = getSongs();
+    this.songs = getSongs();
     this.type = type;
   }
 

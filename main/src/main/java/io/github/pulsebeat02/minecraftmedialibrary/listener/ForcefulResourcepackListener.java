@@ -19,10 +19,10 @@ public final class ForcefulResourcepackListener implements Listener {
   private final byte[] hash;
 
   public ForcefulResourcepackListener(
-          @NotNull final Plugin plugin,
-          @NotNull final Set<UUID> uuids,
-          @NotNull final String url,
-          final byte @NotNull [] hash) {
+      @NotNull final Plugin plugin,
+      @NotNull final Set<UUID> uuids,
+      @NotNull final String url,
+      final byte @NotNull [] hash) {
     this.uuids = uuids;
     this.url = url;
     this.hash = hash;
@@ -47,7 +47,9 @@ public final class ForcefulResourcepackListener implements Listener {
       public void run() {
         if (!ForcefulResourcepackListener.this.uuids.isEmpty()) {
           Logger.info(
-              String.format("Could not force all players to load resourcepack! (%s)", ForcefulResourcepackListener.this.uuids));
+              String.format(
+                  "Could not force all players to load resourcepack! (%s)",
+                  ForcefulResourcepackListener.this.uuids));
           PlayerResourcePackStatusEvent.getHandlerList().unregister(plugin);
         }
       }

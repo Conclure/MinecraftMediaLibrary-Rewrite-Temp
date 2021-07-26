@@ -42,7 +42,8 @@ public class SpotifyTrack implements Track {
   @Override
   public @NotNull Collection<Artist> getArtists() {
     return Arrays.stream(this.track.getArtists())
-            .map(ThrowingFunction.unchecked(SpotifyArtist::new)).collect(Collectors.toList());
+        .map(ThrowingFunction.unchecked(SpotifyArtist::new))
+        .collect(Collectors.toList());
   }
 
   @Override

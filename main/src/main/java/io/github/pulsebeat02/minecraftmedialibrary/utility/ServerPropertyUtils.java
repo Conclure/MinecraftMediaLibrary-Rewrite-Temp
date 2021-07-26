@@ -28,9 +28,7 @@ public final class ServerPropertyUtils {
     }
   }
 
-  private ServerPropertyUtils() {
-
-  }
+  private ServerPropertyUtils() {}
 
   public static void savePropertiesFile() {
     try {
@@ -99,7 +97,7 @@ public final class ServerPropertyUtils {
     }
 
     public String getPropertyName() {
-      return name;
+      return this.name;
     }
   }
 }

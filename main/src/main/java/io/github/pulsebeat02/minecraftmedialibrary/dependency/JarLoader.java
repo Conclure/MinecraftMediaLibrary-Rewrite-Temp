@@ -22,7 +22,7 @@ public final class JarLoader {
     paths.forEach(
         url -> {
           try {
-              this.urls.add(new URL(url.toUri().toString().replace("\\", "/").replace("%20", " ")));
+            this.urls.add(new URL(url.toUri().toString().replace("\\", "/").replace("%20", " ")));
           } catch (final MalformedURLException e) {
             e.printStackTrace();
           }
