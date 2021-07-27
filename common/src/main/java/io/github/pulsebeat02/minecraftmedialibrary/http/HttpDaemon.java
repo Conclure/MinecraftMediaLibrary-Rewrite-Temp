@@ -1,6 +1,5 @@
 package io.github.pulsebeat02.minecraftmedialibrary.http;
 
-import io.github.pulsebeat02.minecraftmedialibrary.utility.NetworkUtils;
 import java.net.Socket;
 import java.nio.file.Path;
 import org.jetbrains.annotations.NotNull;
@@ -27,12 +26,10 @@ public interface HttpDaemon {
   int getPort();
 
   @NotNull
-  default String getAddress() {
-    return NetworkUtils.getPublicIPAdress();
-  }
+  String getAddress();
 
   @NotNull
-  default Path getRelativePath(@NotNull Path file) {
+  default Path getRelativePath(@NotNull final Path file) {
     return getServerPath().relativize(file);
   }
 }

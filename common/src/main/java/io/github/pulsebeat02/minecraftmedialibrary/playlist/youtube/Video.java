@@ -13,6 +13,12 @@ public interface Video extends ResourceUrl, Identifier {
   @NotNull
   Collection<String> getKeywords();
 
+  @NotNull
+  Collection<VideoFormat> getVideoFormats();
+
+  @NotNull
+  Collection<AudioFormat> getAudioFormats();
+
   long getViewCount();
 
   int getAverageRating();

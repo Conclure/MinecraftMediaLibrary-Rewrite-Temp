@@ -1,18 +1,19 @@
 package io.github.pulsebeat02.minecraftmedialibrary.image;
 
 import io.github.pulsebeat02.minecraftmedialibrary.MediaLibraryCore;
+import java.io.IOException;
 import java.nio.file.Path;
-import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
 public interface MapImage {
 
-  void draw();
+  void draw(final boolean resize) throws IOException;
 
-  void onDrawImage();
+  void onStartDrawImage();
 
-  @NotNull
-  List<Integer> getMapIDs();
+  void onFinishDrawImage();
+
+  int[][] getMapMatrix();
 
   @NotNull
   Path getImagePath();

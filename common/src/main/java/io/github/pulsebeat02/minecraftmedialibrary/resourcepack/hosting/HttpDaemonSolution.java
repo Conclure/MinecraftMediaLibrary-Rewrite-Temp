@@ -7,6 +7,8 @@ public interface HttpDaemonSolution extends HostingSolution {
 
   void startServer();
 
+  void stopServer();
+
   @NotNull
   HttpDaemon getDaemon();
 

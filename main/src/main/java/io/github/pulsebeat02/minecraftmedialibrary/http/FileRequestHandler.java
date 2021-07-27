@@ -33,13 +33,13 @@ public class FileRequestHandler implements FileRequest {
     MATCHER = Pattern.compile("GET /?(\\S*).*");
   }
 
-  private final HttpServer daemon;
+  private final HttpServerDaemon daemon;
   private final ZipHeader header;
 
   private Socket client;
 
   public FileRequestHandler(
-      @NotNull final HttpServer daemon,
+      @NotNull final HttpServerDaemon daemon,
       @NotNull final ServerSocket client,
       final ZipHeader header) {
     this.daemon = daemon;

@@ -15,7 +15,7 @@ import java.util.concurrent.Executors;
 import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
 
-public class HttpServer implements HttpDaemon, ZipRequest {
+public class HttpServerDaemon implements HttpDaemon, ZipRequest {
 
   private static final ExecutorService EXECUTOR_SERVICE;
 
@@ -24,20 +24,23 @@ public class HttpServer implements HttpDaemon, ZipRequest {
   }
 
   private final Path directory;
-  private final boolean verbose;
+  private final String ip;
   private final int port;
+  private final boolean verbose;
 
   private ServerSocket socket;
   private ZipHeader header;
   private boolean running;
 
-  public HttpServer(final int port, @NotNull final String path) throws IOException {
+  public HttpServerDaemon(@NotNull final String path, @NotNull final String ip, final int port)
+      throws IOException {
 
     this.running = true;
-    this.port = port;
     this.directory = Paths.get(path);
-    this.header = ZipHeader.ZIP;
+    this.ip = ip;
+    this.port = port;
     this.verbose = true;
+    this.header = ZipHeader.ZIP;
 
     try {
       this.socket = new ServerSocket(port);
@@ -50,11 +53,11 @@ public class HttpServer implements HttpDaemon, ZipRequest {
     }
 
     Logger.info("========================================");
-    Logger.info("Started HTTP Server: ");
+    Logger.info("           Started HTTP Server:         ");
     Logger.info("========================================");
-    Logger.info(String.format("IP: %s", Bukkit.getIp()));
-    Logger.info(String.format("PORT: %d", port));
-    Logger.info(String.format("DIRECTORY: %s", path));
+    Logger.info(String.format("IP Address: %s", ip));
+    Logger.info(String.format("Port: %d", port));
+    Logger.info(String.format("Directory: %s", path));
     Logger.info("========================================");
   }
 
@@ -106,6 +109,11 @@ public class HttpServer implements HttpDaemon, ZipRequest {
   @Override
   public int getPort() {
     return this.port;
+  }
+
+  @Override
+  public @NotNull String getAddress() {
+    return this.ip;
   }
 
   @Override

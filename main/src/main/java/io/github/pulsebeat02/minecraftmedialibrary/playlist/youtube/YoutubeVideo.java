@@ -2,26 +2,29 @@ package io.github.pulsebeat02.minecraftmedialibrary.playlist.youtube;
 
 import com.github.kiulian.downloader.downloader.request.RequestVideoInfo;
 import com.github.kiulian.downloader.model.videos.VideoDetails;
+import com.github.kiulian.downloader.model.videos.VideoInfo;
 import io.github.pulsebeat02.minecraftmedialibrary.throwable.DeadResourceLinkException;
 import io.github.pulsebeat02.minecraftmedialibrary.utility.MediaExtractionUtils;
 import java.util.Collection;
+import java.util.stream.Collectors;
 import org.jetbrains.annotations.NotNull;
 
 public class YoutubeVideo implements Video {
 
   private final String url;
+  private final VideoInfo video;
   private final VideoDetails details;
 
   public YoutubeVideo(@NotNull final String url) {
     this.url = url;
-    this.details =
+    this.video =
         YoutubeProvider.getYoutubeDownloader()
             .getVideoInfo(
                 new RequestVideoInfo(
                     MediaExtractionUtils.getYoutubeID(url)
                         .orElseThrow(() -> new DeadResourceLinkException(url))))
-            .data()
-            .details();
+            .data();
+    this.details = this.video.details();
   }
 
   @Override
@@ -45,6 +48,20 @@ public class YoutubeVideo implements Video {
   }
 
   @Override
+  public @NotNull Collection<VideoFormat> getVideoFormats() {
+    return this.video.videoFormats().stream()
+        .map(YoutubeVideoFormat::new)
+        .collect(Collectors.toList());
+  }
+
+  @Override
+  public @NotNull Collection<AudioFormat> getAudioFormats() {
+    return this.video.audioFormats().stream()
+        .map(YoutubeAudioFormat::new)
+        .collect(Collectors.toList());
+  }
+
+  @Override
   public long getViewCount() {
     return this.details.viewCount();
   }
@@ -57,5 +74,9 @@ public class YoutubeVideo implements Video {
   @Override
   public boolean isLiveContent() {
     return this.details.isLiveContent();
+  }
+
+  protected VideoInfo getVideoInfo() {
+    return this.video;
   }
 }
