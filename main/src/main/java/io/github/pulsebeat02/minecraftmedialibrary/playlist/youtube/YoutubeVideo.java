@@ -76,7 +76,7 @@ public class YoutubeVideo implements Video {
     return this.details.isLiveContent();
   }
 
-  protected VideoInfo getVideoInfo() {
+  protected @NotNull VideoInfo getVideoInfo() {
     return this.video;
   }
 }

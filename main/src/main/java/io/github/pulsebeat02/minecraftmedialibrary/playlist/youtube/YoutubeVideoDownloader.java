@@ -42,7 +42,10 @@ public class YoutubeVideoDownloader implements VideoDownloader {
   private com.github.kiulian.downloader.model.videos.formats.VideoFormat getFormat(
       @NotNull final VideoQuality format) {
     return this.video.getVideoInfo().videoFormats().stream()
-        .filter(f -> VideoQuality.ofKey(f.videoQuality().name()) == format)
+        .filter(
+            f ->
+                f.videoQuality()
+                    .equals(YoutubeVideoFormat.getVideoFormatMappings().inverse().get(format)))
         .findAny()
         .orElseThrow(IllegalArgumentException::new);
   }

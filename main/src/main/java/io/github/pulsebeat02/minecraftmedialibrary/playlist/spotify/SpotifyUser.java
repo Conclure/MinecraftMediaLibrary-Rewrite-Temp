@@ -1,5 +1,9 @@
 package io.github.pulsebeat02.minecraftmedialibrary.playlist.spotify;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
+import com.google.common.collect.ImmutableMap;
+import com.wrapper.spotify.enums.ProductType;
 import com.wrapper.spotify.exceptions.SpotifyWebApiException;
 import io.github.pulsebeat02.minecraftmedialibrary.throwable.UnknownPlaylistException;
 import io.github.pulsebeat02.minecraftmedialibrary.utility.MediaExtractionUtils;
@@ -11,8 +15,21 @@ import org.jetbrains.annotations.NotNull;
 
 public class SpotifyUser implements User {
 
-  private final String url;
+  private static final BiMap<ProductType, Subscription> SUBSCRIPTIONS;
+
+  static {
+    SUBSCRIPTIONS =
+        HashBiMap.create(
+            ImmutableMap.of(
+                ProductType.BASIC_DESKTOP, Subscription.BASIC_DESKTOP,
+                ProductType.DAYPASS, Subscription.DAYPASS,
+                ProductType.FREE, Subscription.FREE,
+                ProductType.OPEN, Subscription.OPEN,
+                ProductType.PREMIUM, Subscription.PREMIUM));
+  }
+
   private final com.wrapper.spotify.model_objects.specification.User user;
+  private final String url;
 
   public SpotifyUser(@NotNull final String url)
       throws IOException, ParseException, SpotifyWebApiException {
@@ -26,9 +43,13 @@ public class SpotifyUser implements User {
             .execute();
   }
 
-  public SpotifyUser(@NotNull final com.wrapper.spotify.model_objects.specification.User user) {
+  SpotifyUser(@NotNull final com.wrapper.spotify.model_objects.specification.User user) {
     this.url = user.getUri();
     this.user = user;
+  }
+
+  protected static @NotNull BiMap<ProductType, Subscription> getSubscriptionMappings() {
+    return SUBSCRIPTIONS;
   }
 
   @Override
@@ -48,9 +69,7 @@ public class SpotifyUser implements User {
 
   @Override
   public @NotNull Image[] getImages() {
-    return Arrays.stream(this.user.getImages())
-        .map(image -> new SpotifyImage(image.getUrl(), image.getWidth(), image.getHeight()))
-        .toArray(SpotifyImage[]::new);
+    return Arrays.stream(this.user.getImages()).map(SpotifyImage::new).toArray(SpotifyImage[]::new);
   }
 
   @Override
@@ -70,6 +89,10 @@ public class SpotifyUser implements User {
 
   @Override
   public @NotNull Subscription getSubscription() {
-    return Subscription.keyOf(this.user.getProduct().type);
+    return SUBSCRIPTIONS.get(this.user.getProduct());
+  }
+
+  protected @NotNull com.wrapper.spotify.model_objects.specification.User getUser() {
+    return this.user;
   }
 }

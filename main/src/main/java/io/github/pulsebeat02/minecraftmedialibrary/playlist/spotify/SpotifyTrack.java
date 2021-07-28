@@ -14,8 +14,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class SpotifyTrack implements Track {
 
-  private final String url;
   private final com.wrapper.spotify.model_objects.specification.Track track;
+  private final String url;
 
   public SpotifyTrack(@NotNull final String url)
       throws IOException, ParseException, SpotifyWebApiException {
@@ -79,5 +79,9 @@ public class SpotifyTrack implements Track {
   @Override
   public @NotNull String getUrl() {
     return this.url;
+  }
+
+  protected @NotNull com.wrapper.spotify.model_objects.specification.Track getTrack() {
+    return this.track;
   }
 }

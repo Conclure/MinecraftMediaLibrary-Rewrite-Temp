@@ -62,6 +62,8 @@ public class StaticImage implements MapImage {
       }
     }
 
+    new EnhancedMapRenderer(matrix, this.maps);
+
     onFinishDrawImage();
   }
 

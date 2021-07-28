@@ -58,4 +58,12 @@ public class YoutubePlaylist implements Playlist {
   public long getViewCount() {
     return this.details.viewCount();
   }
+
+  protected @NotNull PlaylistInfo getPlaylistInfo() {
+    return this.info;
+  }
+
+  protected @NotNull PlaylistDetails getPlaylistDetails() {
+    return this.details;
+  }
 }

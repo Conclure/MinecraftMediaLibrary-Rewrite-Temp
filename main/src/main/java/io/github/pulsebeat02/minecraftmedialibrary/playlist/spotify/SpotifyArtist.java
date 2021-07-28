@@ -12,8 +12,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class SpotifyArtist implements Artist {
 
-  private final String url;
   private final com.wrapper.spotify.model_objects.specification.Artist artist;
+  private final String url;
 
   public SpotifyArtist(@NotNull final String url)
       throws IOException, ParseException, SpotifyWebApiException {
@@ -65,12 +65,16 @@ public class SpotifyArtist implements Artist {
   @Override
   public @NotNull Image[] getImages() {
     return Arrays.stream(this.artist.getImages())
-        .map(image -> new SpotifyImage(image.getUrl(), image.getWidth(), image.getHeight()))
+        .map(SpotifyImage::new)
         .toArray(SpotifyImage[]::new);
   }
 
   @Override
   public @NotNull String getUrl() {
     return this.url;
+  }
+
+  protected @NotNull com.wrapper.spotify.model_objects.specification.Artist getArtist() {
+    return this.artist;
   }
 }

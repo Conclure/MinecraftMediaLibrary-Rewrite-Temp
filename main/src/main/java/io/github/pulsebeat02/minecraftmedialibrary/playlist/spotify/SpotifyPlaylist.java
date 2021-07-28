@@ -14,8 +14,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class SpotifyPlaylist implements TrackPlaylist {
 
-  private final String url;
   private final Playlist playlist;
+  private final String url;
 
   public SpotifyPlaylist(@NotNull final String url)
       throws IOException, ParseException, SpotifyWebApiException {
@@ -79,5 +79,9 @@ public class SpotifyPlaylist implements TrackPlaylist {
   @Override
   public @NotNull Map<String, String> getExternalUrls() {
     return this.playlist.getExternalUrls().getExternalUrls();
+  }
+
+  protected @NotNull Playlist getPlaylist() {
+    return this.playlist;
   }
 }

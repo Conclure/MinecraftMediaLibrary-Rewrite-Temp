@@ -1,4 +1,4 @@
-package io.github.pulsebeat02.minecraftmedialibrary.player;
+package io.github.pulsebeat02.minecraftmedialibrary.playlist;
 
 public interface Dimension {
 

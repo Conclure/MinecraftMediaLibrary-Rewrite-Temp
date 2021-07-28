@@ -2,30 +2,30 @@ package io.github.pulsebeat02.minecraftmedialibrary.playlist.spotify;
 
 import org.jetbrains.annotations.NotNull;
 
-public class SpotifyImage implements Image {
+public final class SpotifyImage implements Image {
 
-  private final String url;
-  private final int width;
-  private final int height;
+  private final com.wrapper.spotify.model_objects.specification.Image image;
 
-  public SpotifyImage(@NotNull final String url, final int width, final int height) {
-    this.url = url;
-    this.width = width;
-    this.height = height;
+  SpotifyImage(@NotNull final com.wrapper.spotify.model_objects.specification.Image image) {
+    this.image = image;
   }
 
   @Override
   public int getWidth() {
-    return this.width;
+    return this.image.getWidth();
   }
 
   @Override
   public int getHeight() {
-    return this.height;
+    return this.image.getHeight();
   }
 
   @Override
   public @NotNull String getUrl() {
-    return this.url;
+    return this.image.getUrl();
+  }
+
+  protected @NotNull com.wrapper.spotify.model_objects.specification.Image getImage() {
+    return this.image;
   }
 }

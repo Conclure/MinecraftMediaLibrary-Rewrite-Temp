@@ -2,15 +2,15 @@ package io.github.pulsebeat02.minecraftmedialibrary.callback;
 
 import io.github.pulsebeat02.minecraftmedialibrary.MediaLibraryCore;
 import io.github.pulsebeat02.minecraftmedialibrary.nms.PacketHandler;
-import io.github.pulsebeat02.minecraftmedialibrary.player.Dimension;
+import io.github.pulsebeat02.minecraftmedialibrary.playlist.Dimension;
 import org.jetbrains.annotations.NotNull;
 
-public interface FrameCallback extends Dimension, Viewable {
+public interface Callback extends Dimension, Viewable {
 
   void process(final int[] data);
 
   // width in pixels
-  int getVideoWidth();
+  int getBlockWidth();
 
   int getFrameDelay();
 
@@ -22,5 +22,5 @@ public interface FrameCallback extends Dimension, Viewable {
   MediaLibraryCore getLibrary();
 
   @NotNull
-  PacketHandler getPacketHandle();
+  PacketHandler getPacketHandler();
 }
