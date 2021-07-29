@@ -1,6 +1,5 @@
 package io.github.pulsebeat02.minecraftmedialibrary.image;
 
-import com.google.common.base.Preconditions;
 import java.awt.image.BufferedImage;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -10,16 +9,11 @@ import org.jetbrains.annotations.NotNull;
 
 public class EnhancedMapRenderer implements MapRenderer {
 
-  private final BufferedImage[][] images;
   private final MapView[][] maps;
 
-  public EnhancedMapRenderer(@NotNull final BufferedImage[][] images, final int[][] maps) {
-    final int length = images.length;
-    final int width = images[0].length;
-    Preconditions.checkArgument(
-        length == maps.length && width == maps[0].length,
-        "Length and Width for 2D arrays passed in are not the same!");
-    this.images = images;
+  public EnhancedMapRenderer(final int[][] maps) {
+    final int length = maps.length;
+    final int width = maps[0].length;
     this.maps = new MapView[length][width];
     for (int i = 0; i < maps.length; i++) {
       for (int j = 0; j < maps[i].length; j++) {
@@ -29,7 +23,7 @@ public class EnhancedMapRenderer implements MapRenderer {
   }
 
   @Override
-  public void drawMap() {
+  public void drawMap(@NotNull final BufferedImage[][] images) {
     for (int i = 0; i < this.maps.length; i++) {
       for (int j = 0; j < this.maps[i].length; j++) {
         final MapView view = this.maps[i][j];
@@ -43,7 +37,7 @@ public class EnhancedMapRenderer implements MapRenderer {
                   @NotNull final MapView map,
                   @NotNull final MapCanvas canvas,
                   @NotNull final Player player) {
-                canvas.drawImage(0, 0, EnhancedMapRenderer.this.images[x][y]);
+                canvas.drawImage(0, 0, images[x][y]);
               }
             });
       }

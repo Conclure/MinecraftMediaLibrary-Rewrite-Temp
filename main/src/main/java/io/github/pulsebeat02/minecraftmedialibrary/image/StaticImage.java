@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 public class StaticImage implements MapImage {
 
   private final MediaLibraryCore core;
+  private final EnhancedMapRenderer renderer;
   private final int[][] maps;
 
   /*
@@ -33,6 +34,7 @@ public class StaticImage implements MapImage {
       final int height) {
     Preconditions.checkArgument(maps.length >= 1 && maps[0].length >= 1, "Invalid Map Matrix!");
     this.core = core;
+    this.renderer = new EnhancedMapRenderer(maps);
     this.image = image;
     this.maps = maps;
     this.width = width;
@@ -53,7 +55,6 @@ public class StaticImage implements MapImage {
     if (resize) {
       img = ImageUtils.resize(img, width, height);
     }
-
     final BufferedImage[][] matrix = new BufferedImage[itemframeWidth][itemframeHeight];
     for (int rows = 0; rows < matrix.length; rows++) {
       for (int cols = 0; cols < matrix[rows].length; cols++) {
@@ -62,7 +63,7 @@ public class StaticImage implements MapImage {
       }
     }
 
-    new EnhancedMapRenderer(matrix, this.maps);
+    this.renderer.drawMap(matrix);
 
     onFinishDrawImage();
   }
