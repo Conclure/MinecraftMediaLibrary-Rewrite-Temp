@@ -95,7 +95,7 @@ public class StaticImage implements MapImage {
   }
 
   @Override
-  public @NotNull MediaLibraryCore getLibrary() {
+  public @NotNull MediaLibraryCore getCore() {
     return this.core;
   }
 }

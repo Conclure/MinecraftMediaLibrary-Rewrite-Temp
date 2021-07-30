@@ -1,11 +1,11 @@
 package io.github.pulsebeat02.minecraftmedialibrary.image;
 
-import io.github.pulsebeat02.minecraftmedialibrary.MediaLibraryCore;
+import io.github.pulsebeat02.minecraftmedialibrary.LibraryInjectable;
 import java.io.IOException;
 import java.nio.file.Path;
 import org.jetbrains.annotations.NotNull;
 
-public interface MapImage {
+public interface MapImage extends LibraryInjectable {
 
   void draw(final boolean resize) throws IOException;
 
@@ -22,6 +22,4 @@ public interface MapImage {
 
   int getFrameWidth();
 
-  @NotNull
-  MediaLibraryCore getLibrary();
 }

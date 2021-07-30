@@ -18,7 +18,7 @@ public final class OperatingSystem implements OperatingSystemInfo {
     this.osName = osName;
     this.type = type;
     this.version = version;
-    this.linuxDistro = type == OSType.LINUX ? retrieveLinuxDistribution() : "";
+    this.linuxDistro = type == OSType.UNIX ? retrieveLinuxDistribution() : "";
   }
 
   private String retrieveLinuxDistribution() {

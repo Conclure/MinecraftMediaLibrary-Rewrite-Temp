@@ -46,7 +46,7 @@ public final class SystemDiagnostics implements Diagnostic {
     return new OperatingSystem(
         os,
         os.contains("nix") || os.contains("nux") || os.contains("aix")
-            ? OSType.LINUX
+            ? OSType.UNIX
             : os.contains("win") ? OSType.WINDOWS : OSType.MAC,
         System.getProperty("os.version"));
   }
@@ -74,7 +74,7 @@ public final class SystemDiagnostics implements Diagnostic {
           this.ffmpegDownloadLink =
               "https://github.com/a-schild/jave2/raw/master/jave-nativebin-win64/src/main/resources/ws/schild/jave/nativebin/ffmpeg-amd64.exe";
           break;
-        case LINUX:
+        case UNIX:
           if (this.cpu.getArchitecture().contains("arm")) {
             Logger.info("Detected Linux ARM 64-bit Operating System");
             this.ffmpegDownloadLink =
@@ -109,7 +109,7 @@ public final class SystemDiagnostics implements Diagnostic {
           this.ffmpegDownloadLink =
               "https://github.com/a-schild/jave2/raw/master/jave-nativebin-win32/src/main/resources/ws/schild/jave/nativebin/ffmpeg-x86.exe";
           break;
-        case LINUX:
+        case UNIX:
           if (this.cpu.getArchitecture().contains("arm")) {
             Logger.info("Detected Linux ARM 32-bit Operating System");
             this.vlcDownloadLink = "N/A";

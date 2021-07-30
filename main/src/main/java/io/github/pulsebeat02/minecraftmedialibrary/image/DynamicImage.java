@@ -120,7 +120,7 @@ public class DynamicImage implements io.github.pulsebeat02.minecraftmedialibrary
   }
 
   @Override
-  public @NotNull MediaLibraryCore getLibrary() {
+  public @NotNull MediaLibraryCore getCore() {
     return this.core;
   }
 

@@ -59,7 +59,7 @@ public abstract class FrameCallback implements Callback {
   }
 
   @Override
-  public @NotNull MediaLibraryCore getLibrary() {
+  public @NotNull MediaLibraryCore getCore() {
     return this.core;
   }
 

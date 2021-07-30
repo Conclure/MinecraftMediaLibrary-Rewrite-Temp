@@ -1,10 +1,10 @@
 package io.github.pulsebeat02.minecraftmedialibrary.ffmpeg;
 
-import io.github.pulsebeat02.minecraftmedialibrary.MediaLibraryCore;
+import io.github.pulsebeat02.minecraftmedialibrary.LibraryInjectable;
 import java.util.Collection;
 import org.jetbrains.annotations.NotNull;
 
-public interface FFmpegArgumentPreparation extends EnhancedExecution {
+public interface FFmpegArgumentPreparation extends LibraryInjectable, EnhancedExecution {
 
   @NotNull
   FFmpegArgumentPreparation addArgument(@NotNull final String arg);
@@ -30,9 +30,6 @@ public interface FFmpegArgumentPreparation extends EnhancedExecution {
 
   @NotNull
   FFmpegArgumentPreparation addMultipleArguments(@NotNull final Collection<String> arguments);
-
-  @NotNull
-  MediaLibraryCore getCore();
 
   void clearArguments();
 

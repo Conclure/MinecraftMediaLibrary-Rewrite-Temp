@@ -69,7 +69,7 @@ public final class FFmpegInstaller {
     FileUtils.createFileIfNotExists(download);
 
     DependencyUtils.downloadFile(download, url);
-    if (type == OSType.MAC || type == OSType.LINUX) {
+    if (type == OSType.MAC || type == OSType.UNIX) {
       new CommandTask("chmod", "-R", "777", download.toAbsolutePath().toString()).run();
     }
 
