@@ -2,7 +2,6 @@ package io.github.pulsebeat02.minecraftmedialibrary.dependency;
 
 import io.github.pulsebeat02.minecraftmedialibrary.Logger;
 import io.github.pulsebeat02.minecraftmedialibrary.MediaLibraryCore;
-import io.github.pulsebeat02.minecraftmedialibrary.MinecraftMediaLibrary;
 import io.github.pulsebeat02.minecraftmedialibrary.analysis.Diagnostic;
 import io.github.pulsebeat02.minecraftmedialibrary.analysis.OSType;
 import io.github.pulsebeat02.minecraftmedialibrary.task.CommandTask;
@@ -27,7 +26,7 @@ public final class FFmpegInstaller {
   private String hash;
   private Path executable;
 
-  public FFmpegInstaller(@NotNull final MinecraftMediaLibrary core) throws IOException {
+  public FFmpegInstaller(@NotNull final MediaLibraryCore core) throws IOException {
     this.core = core;
     final Path path = core.getDependencyPath();
     this.folder = path.resolve("ffmpeg");

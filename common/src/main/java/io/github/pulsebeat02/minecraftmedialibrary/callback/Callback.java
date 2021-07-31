@@ -2,7 +2,7 @@ package io.github.pulsebeat02.minecraftmedialibrary.callback;
 
 import io.github.pulsebeat02.minecraftmedialibrary.LibraryInjectable;
 import io.github.pulsebeat02.minecraftmedialibrary.nms.PacketHandler;
-import io.github.pulsebeat02.minecraftmedialibrary.playlist.Dimension;
+import io.github.pulsebeat02.minecraftmedialibrary.utility.Dimension;
 import org.jetbrains.annotations.NotNull;
 
 public interface Callback extends LibraryInjectable, Dimension, Viewable {

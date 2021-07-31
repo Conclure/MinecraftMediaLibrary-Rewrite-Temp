@@ -1,6 +1,7 @@
 package io.github.pulsebeat02.minecraftmedialibrary.dependency;
 
 import io.github.pulsebeat02.minecraftmedialibrary.Logger;
+import io.github.pulsebeat02.minecraftmedialibrary.MediaLibraryCore;
 import io.github.pulsebeat02.minecraftmedialibrary.sneaky.ThrowingConsumer;
 import io.github.pulsebeat02.minecraftmedialibrary.utility.DependencyUtils;
 import io.github.pulsebeat02.minecraftmedialibrary.utility.FileUtils;
@@ -49,13 +50,13 @@ public final class ArtifactInstaller {
   private final Path relocatedFolder;
   private final Path hashFile;
 
-  public ArtifactInstaller(@NotNull final Path dependencyFolder)
+  public ArtifactInstaller(@NotNull final MediaLibraryCore core)
       throws ReflectiveOperationException, URISyntaxException, NoSuchAlgorithmException,
           IOException {
     this.factory = ReflectiveJarRelocatorFacadeFactory.create();
     this.jars = new HashSet<>();
     this.hashes = new HashSet<>();
-    this.dependencyFolder = dependencyFolder;
+    this.dependencyFolder = core.getDependencyPath();
     this.relocatedFolder = this.dependencyFolder.resolve("relocated");
     this.hashFile = this.dependencyFolder.resolve(".relocated-cache");
   }

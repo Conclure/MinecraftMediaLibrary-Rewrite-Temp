@@ -44,10 +44,9 @@ public class SilentWindowsInstallation extends SilentInstallation {
   }
 
   @Override
-  public void loadNativeBinaries() {
+  public void loadNativeBinaries() throws IOException {
     NativeLibrary.addSearchPath(
         RuntimeUtil.getLibVlcLibraryName(), getInstallationPath().toString());
-    // vlc path
-
+    super.loadNativeBinaries();
   }
 }

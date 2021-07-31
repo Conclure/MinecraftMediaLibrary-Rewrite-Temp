@@ -2,6 +2,7 @@ package io.github.pulsebeat02.minecraftmedialibrary.callback;
 
 import io.github.pulsebeat02.minecraftmedialibrary.MediaLibraryCore;
 import io.github.pulsebeat02.minecraftmedialibrary.dither.DitherAlgorithm;
+import io.github.pulsebeat02.minecraftmedialibrary.utility.ImmutableDimension;
 import java.util.UUID;
 import org.jetbrains.annotations.NotNull;
 
@@ -15,11 +16,10 @@ public class MapCallback extends FrameCallback implements MapCallbackDispatcher 
       final UUID[] viewers,
       final DitherAlgorithm algorithm,
       final int map,
-      final int width,
-      final int height,
+      @NotNull final ImmutableDimension dimension,
       final int blockWidth,
       final int delay) {
-    super(core, viewers, width, height, blockWidth, delay);
+    super(core, viewers, dimension, blockWidth, delay);
     this.algorithm = algorithm;
     this.map = map;
   }
@@ -27,6 +27,7 @@ public class MapCallback extends FrameCallback implements MapCallbackDispatcher 
   @Override
   public void process(final int[] data) {
     final long time = System.currentTimeMillis();
+    final ImmutableDimension dimension = getDimensions();
     if (time - getLastUpdated() >= getFrameDelay()) {
       setLastUpdated(time);
       final int width = getBlockWidth();
@@ -34,8 +35,8 @@ public class MapCallback extends FrameCallback implements MapCallbackDispatcher 
           .displayMaps(
               getViewers(),
               this.map,
-              getWidth(),
-              getHeight(),
+              dimension.getWidth(),
+              getDimensions().getHeight(),
               this.algorithm.ditherIntoMinecraft(data, width),
               width);
     }

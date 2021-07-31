@@ -19,10 +19,12 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public final class MinecraftMediaLibrary implements MediaLibraryCore {
 
   private final Plugin plugin;
+  private final LibraryLoader loader;
   private final Diagnostic diagnostics;
   private final Path libraryPath;
   private final Path httpServerPath;
@@ -40,6 +42,7 @@ public final class MinecraftMediaLibrary implements MediaLibraryCore {
 
   MinecraftMediaLibrary(
       @NotNull final Plugin plugin,
+      @Nullable final LibraryLoader loader,
       @NotNull final Path libraryPath,
       @NotNull final Path dependencyPath,
       @NotNull final Path httpServerPath,
@@ -89,6 +92,9 @@ public final class MinecraftMediaLibrary implements MediaLibraryCore {
         }
       };
     }
+
+    this.loader = loader == null ? new DependencyLoader(this) : loader;
+    this.loader.start();
 
     PluginUsageTips.sendWarningMessage();
     PluginUsageTips.sendPacketCompressionTip();
@@ -180,6 +186,11 @@ public final class MinecraftMediaLibrary implements MediaLibraryCore {
   @Override
   public void setRegistrationHandler(@NotNull final Listener listener) {
     this.registrationListener = listener;
+  }
+
+  @Override
+  public @NotNull LibraryLoader getLibraryLoader() {
+    return this.loader;
   }
 
   @Override

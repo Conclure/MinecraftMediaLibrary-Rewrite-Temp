@@ -57,7 +57,9 @@ public class SilentMacInstallation extends SilentInstallation {
   }
 
   @Override
-  public void loadNativeBinaries() {}
+  public void loadNativeBinaries() throws IOException {
+    super.loadNativeBinaries();
+  }
 
   private int mountDiskImage(@NotNull final Path dmg) throws IOException, InterruptedException {
 

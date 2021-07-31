@@ -1,6 +1,7 @@
 package io.github.pulsebeat02.minecraftmedialibrary.callback;
 
 import io.github.pulsebeat02.minecraftmedialibrary.MediaLibraryCore;
+import io.github.pulsebeat02.minecraftmedialibrary.utility.ImmutableDimension;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Set;
@@ -21,11 +22,10 @@ public class ChatCallback extends FrameCallback implements ChatCallbackDispatche
       @NotNull final MediaLibraryCore core,
       final UUID[] viewers,
       @NotNull final String character,
-      final int width,
-      final int height,
+      @NotNull final ImmutableDimension dimension,
       final int blockWidth,
       final int delay) {
-    super(core, viewers, width, height, blockWidth, delay);
+    super(core, viewers, dimension, blockWidth, delay);
     this.character = character;
     this.players = Collections.newSetFromMap(new WeakHashMap<>());
     this.players.addAll(
@@ -37,8 +37,9 @@ public class ChatCallback extends FrameCallback implements ChatCallbackDispatche
     final long time = System.currentTimeMillis();
     if (time - getLastUpdated() >= getFrameDelay()) {
       setLastUpdated(time);
-      final int height = getHeight();
-      final int width = getWidth();
+      final ImmutableDimension dimension = getDimensions();
+      final int width = dimension.getWidth();
+      final int height = dimension.getHeight();
       for (int y = 0; y < height; ++y) {
         int before = -1;
         final StringBuilder msg = new StringBuilder();

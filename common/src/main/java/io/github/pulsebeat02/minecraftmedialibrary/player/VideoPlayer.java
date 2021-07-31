@@ -1,8 +1,8 @@
 package io.github.pulsebeat02.minecraftmedialibrary.player;
 
 import io.github.pulsebeat02.minecraftmedialibrary.callback.Callback;
-import io.github.pulsebeat02.minecraftmedialibrary.playlist.Dimension;
 import io.github.pulsebeat02.minecraftmedialibrary.playlist.ResourceUrl;
+import io.github.pulsebeat02.minecraftmedialibrary.utility.Dimension;
 import java.util.Set;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;

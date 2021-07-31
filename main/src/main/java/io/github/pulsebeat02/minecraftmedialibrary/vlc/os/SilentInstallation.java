@@ -2,6 +2,7 @@ package io.github.pulsebeat02.minecraftmedialibrary.vlc.os;
 
 import io.github.pulsebeat02.minecraftmedialibrary.Logger;
 import io.github.pulsebeat02.minecraftmedialibrary.MediaLibraryCore;
+import io.github.pulsebeat02.minecraftmedialibrary.vlc.NativeBinarySearch;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -47,5 +48,10 @@ public abstract class SilentInstallation implements SilentInstallationProvider {
       Logger.error("A severe I/O error occurred from deleting the archive file!");
       e.printStackTrace();
     }
+  }
+
+  @Override
+  public void loadNativeBinaries() throws IOException {
+    new NativeBinarySearch(getCore(), getInstallationPath()).search();
   }
 }

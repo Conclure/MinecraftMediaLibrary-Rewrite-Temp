@@ -1,6 +1,7 @@
 package io.github.pulsebeat02.minecraftmedialibrary.callback;
 
 import io.github.pulsebeat02.minecraftmedialibrary.MediaLibraryCore;
+import io.github.pulsebeat02.minecraftmedialibrary.utility.ImmutableDimension;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Collections;
@@ -43,11 +44,10 @@ public class ScoreboardCallback extends FrameCallback implements ScoreboardCallb
       @NotNull final MediaLibraryCore core,
       final UUID[] viewers,
       final int id,
-      final int width,
-      final int height,
+      @NotNull final ImmutableDimension dimension,
       final int blockWidth,
       final int delay) {
-    super(core, viewers, width, height, blockWidth, delay);
+    super(core, viewers, dimension, blockWidth, delay);
     this.viewers = Collections.newSetFromMap(new WeakHashMap<>());
     this.viewers.addAll(Arrays.stream(viewers).map(Bukkit::getPlayer).collect(Collectors.toSet()));
     this.name = String.format("%s Video Player (%s)", core.getPlugin().getName(), id);
@@ -58,8 +58,9 @@ public class ScoreboardCallback extends FrameCallback implements ScoreboardCallb
     final long time = System.currentTimeMillis();
     if (time - getLastUpdated() >= getFrameDelay()) {
       setLastUpdated(time);
-      final int height = getHeight();
-      final int width = getWidth();
+      final ImmutableDimension dimension = getDimensions();
+      final int width = dimension.getWidth();
+      final int height = dimension.getHeight();
       if (this.scoreboard == null) {
         this.scoreboard = Objects.requireNonNull(Bukkit.getScoreboardManager()).getNewScoreboard();
         final Objective objective =

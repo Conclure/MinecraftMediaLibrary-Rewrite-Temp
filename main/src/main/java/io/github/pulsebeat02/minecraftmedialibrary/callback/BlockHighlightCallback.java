@@ -1,6 +1,7 @@
 package io.github.pulsebeat02.minecraftmedialibrary.callback;
 
 import io.github.pulsebeat02.minecraftmedialibrary.MediaLibraryCore;
+import io.github.pulsebeat02.minecraftmedialibrary.utility.ImmutableDimension;
 import java.util.UUID;
 import org.bukkit.Location;
 import org.jetbrains.annotations.NotNull;
@@ -14,11 +15,10 @@ public class BlockHighlightCallback extends FrameCallback
       @NotNull final MediaLibraryCore core,
       final UUID[] viewers,
       @NotNull final Location location,
-      final int width,
-      final int height,
+      @NotNull final ImmutableDimension dimension,
       final int blockWidth,
       final int delay) {
-    super(core, viewers, width, height, blockWidth, delay);
+    super(core, viewers, dimension, blockWidth, delay);
     this.location = location;
   }
 
@@ -28,8 +28,9 @@ public class BlockHighlightCallback extends FrameCallback
     final int delay = getFrameDelay();
     if (time - getLastUpdated() >= delay) {
       setLastUpdated(time);
-      final int height = getHeight();
-      final int width = getWidth();
+      final ImmutableDimension dimension = getDimensions();
+      final int width = dimension.getWidth();
+      final int height = dimension.getHeight();
       for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
           getPacketHandler()

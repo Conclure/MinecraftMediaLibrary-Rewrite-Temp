@@ -57,4 +57,7 @@ public interface MediaLibraryCore {
   Listener getRegistrationHandler();
 
   void setRegistrationHandler(@NotNull final Listener listener);
+
+  @NotNull
+  LibraryLoader getLibraryLoader();
 }

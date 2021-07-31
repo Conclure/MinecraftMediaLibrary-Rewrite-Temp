@@ -6,11 +6,10 @@ import org.jetbrains.annotations.NotNull;
 
 public interface VLCBinaryInstallation extends HostOperator {
 
-    void downloadBinaries() throws IOException, InterruptedException;
+  void downloadBinaries() throws IOException, InterruptedException;
 
-    void loadNativeBinaries();
+  void loadNativeBinaries() throws IOException;
 
-    @NotNull
-    Path getInstallationPath();
-
+  @NotNull
+  Path getInstallationPath();
 }

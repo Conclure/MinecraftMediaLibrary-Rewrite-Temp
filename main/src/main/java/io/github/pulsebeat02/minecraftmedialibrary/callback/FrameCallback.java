@@ -3,16 +3,15 @@ package io.github.pulsebeat02.minecraftmedialibrary.callback;
 import com.google.common.base.Preconditions;
 import io.github.pulsebeat02.minecraftmedialibrary.MediaLibraryCore;
 import io.github.pulsebeat02.minecraftmedialibrary.nms.PacketHandler;
+import io.github.pulsebeat02.minecraftmedialibrary.utility.ImmutableDimension;
 import java.util.UUID;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class FrameCallback implements Callback {
 
   private final MediaLibraryCore core;
+  private final ImmutableDimension dimension;
   private final UUID[] viewers;
-
-  private final int width;
-  private final int height;
   private final int blockWidth;
 
   private final int delay;
@@ -22,18 +21,18 @@ public abstract class FrameCallback implements Callback {
   public FrameCallback(
       @NotNull final MediaLibraryCore core,
       final UUID[] viewers,
-      final int width,
-      final int height,
+      @NotNull final ImmutableDimension dimension,
       final int blockWidth,
       final int delay) {
-    Preconditions.checkArgument(width >= 0, "Width must be greater than or equal to 0!");
-    Preconditions.checkArgument(height >= 0, "Height must be greater than or equal to 0!");
+    Preconditions.checkArgument(
+        dimension.getWidth() >= 0, "Width must be greater than or equal to 0!");
+    Preconditions.checkArgument(
+        dimension.getHeight() >= 0, "Height must be greater than or equal to 0!");
     Preconditions.checkArgument(
         delay >= 0, "Delay between frames must be greater than or equal to 0!");
     this.core = core;
     this.viewers = viewers;
-    this.width = width;
-    this.height = height;
+    this.dimension = dimension;
     this.blockWidth = blockWidth;
     this.delay = delay;
   }
@@ -74,12 +73,7 @@ public abstract class FrameCallback implements Callback {
   }
 
   @Override
-  public int getWidth() {
-    return this.width;
-  }
-
-  @Override
-  public int getHeight() {
-    return this.height;
+  public @NotNull ImmutableDimension getDimensions() {
+    return this.dimension;
   }
 }

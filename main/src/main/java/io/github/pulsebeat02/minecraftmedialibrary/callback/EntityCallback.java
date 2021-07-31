@@ -1,6 +1,7 @@
 package io.github.pulsebeat02.minecraftmedialibrary.callback;
 
 import io.github.pulsebeat02.minecraftmedialibrary.MediaLibraryCore;
+import io.github.pulsebeat02.minecraftmedialibrary.utility.ImmutableDimension;
 import java.util.UUID;
 import java.util.function.Consumer;
 import org.apache.commons.lang.StringUtils;
@@ -22,22 +23,21 @@ public class EntityCallback extends FrameCallback implements EntityCallbackDispa
   public EntityCallback(
       @NotNull final MediaLibraryCore core,
       final UUID[] viewers,
-      @NotNull final Location locoation,
+      @NotNull final Location location,
       @NotNull final String name,
       @NotNull final EntityType type,
-      final int width,
-      final int height,
+      @NotNull final ImmutableDimension dimension,
       final int blockWidth,
       final int delay) {
-    super(core, viewers, width, height, blockWidth, delay);
-    this.location = locoation;
+    super(core, viewers, dimension, blockWidth, delay);
+    this.location = location;
     this.type = type;
     this.name = name;
     this.entities = getModifiedEntities();
   }
 
   private Entity[] getModifiedEntities() {
-    final int height = getHeight();
+    final int height = getDimensions().getHeight();
     final Entity[] ents = new Entity[height];
     final Location spawn = this.location.clone();
     final World world = spawn.getWorld();
