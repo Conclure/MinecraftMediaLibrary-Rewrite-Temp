@@ -1,13 +1,12 @@
 package io.github.pulsebeat02.minecraftmedialibrary.player;
 
+import io.github.pulsebeat02.minecraftmedialibrary.LibraryInjectable;
 import io.github.pulsebeat02.minecraftmedialibrary.callback.Callback;
 import io.github.pulsebeat02.minecraftmedialibrary.playlist.ResourceUrl;
 import io.github.pulsebeat02.minecraftmedialibrary.utility.Dimension;
-import java.util.Set;
-import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public interface VideoPlayer extends ResourceUrl, Dimension {
+public interface VideoPlayer extends LibraryInjectable, ResourceUrl, Dimension {
 
   @NotNull
   Callback getCallback();
@@ -28,14 +27,11 @@ public interface VideoPlayer extends ResourceUrl, Dimension {
 
   boolean isRepeated();
 
-  void setRepeat(final boolean repeat);
-
   void onRepeat(final boolean status);
 
   long getStartTime();
 
   void setStartTime(final long seconds);
 
-  @NotNull
-  Set<Player> getViewers();
+  void initializePlayer(final long seconds);
 }
