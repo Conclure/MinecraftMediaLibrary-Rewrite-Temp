@@ -12,7 +12,7 @@ import java.util.List;
 import static java.lang.System.arraycopy;
 
 /** Stolen directly from https://github.com/DhyanB/Open-Imaging */
-public class GifDecoder {
+public final class GifDecoder {
 
   public static GifImage read(final byte[] in) throws IOException {
     final GifDecoder decoder = new GifDecoder();

@@ -3,6 +3,7 @@ package io.github.pulsebeat02.minecraftmedialibrary.dependency;
 import org.jetbrains.annotations.NotNull;
 
 public enum DependencyInfo {
+
   VLCJ("uk{}co{}caprica", "vlcj", "4{}7{}1", Repositories.MAVEN),
   VLCJ_NATIVES("uk{}co{}caprica", "vlcj-natives", "4{}1{}0", Repositories.MAVEN),
   VLCJ_NATIVE_STREAMS("uk{}co{}caprica", "native-streams", "1{}0{}0", Repositories.MAVEN),

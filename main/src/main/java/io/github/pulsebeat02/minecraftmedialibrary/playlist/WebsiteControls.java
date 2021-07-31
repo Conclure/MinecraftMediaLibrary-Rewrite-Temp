@@ -1,12 +1,14 @@
 package io.github.pulsebeat02.minecraftmedialibrary.playlist;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
 public class WebsiteControls implements WebPlayerControls {
 
   private final String url;
-  private final List<String> songs;
+  private final Collection<String> songs;
   private final PlaylistType type;
   private int index;
 
@@ -17,13 +19,8 @@ public class WebsiteControls implements WebPlayerControls {
   }
 
   private List<String> getSongs() {
-    if (this.type == PlaylistType.YOUTUBE) {
-      return new YoutubePlaylistHelper(this.url).getAlbumSongs();
-    } else if (this.type == PlaylistType.SPOTIFY) {
-      return new SpotifyPlaylistHelper(this.url).getAlbumSongs();
-    } else {
-      throw new UnsupportedOperationException("Unsupported Playlist!");
-    }
+    // TODO: 7/30/2021 get songs from spotify using some api
+    return Collections.emptyList();
   }
 
   @Override

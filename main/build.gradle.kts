@@ -25,6 +25,7 @@ dependencies {
     compileOnly("net.dv8tion:JDA:4.3.0_277")
     compileOnly("com.github.ben-manes.caffeine:caffeine:3.0.3")
 
-    api(project(":common"))
+    api(project(":api"))
+    api(project(":v1_16_R3"))
 
 }

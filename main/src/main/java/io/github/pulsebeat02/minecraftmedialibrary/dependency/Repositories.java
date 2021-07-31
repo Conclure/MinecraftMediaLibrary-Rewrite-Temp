@@ -3,6 +3,7 @@ package io.github.pulsebeat02.minecraftmedialibrary.dependency;
 import org.jetbrains.annotations.NotNull;
 
 public enum Repositories {
+
   MAVEN("https://repo1.maven.org/maven2"),
   JITPACK("https://jitpack.io");
 

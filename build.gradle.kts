@@ -1,9 +1,11 @@
+group = "io.github.pulsebeat02"
+description = "Parent module for MinecraftMediaLibrary"
+version = "1.0.0"
+
 plugins {
     java
+    `java-library`
 }
-
-group = "io.github.pulsebeat02"
-version = "1.0.0"
 
 subprojects {
 

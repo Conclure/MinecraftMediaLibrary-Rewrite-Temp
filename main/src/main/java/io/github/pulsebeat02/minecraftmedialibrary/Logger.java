@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import org.jetbrains.annotations.NotNull;
 
-public class Logger {
+public final class Logger {
 
   private static PrintWriter LOGGER;
   private static Path LOG_FILE;
@@ -20,7 +20,7 @@ public class Logger {
         Files.createFile(LOG_FILE);
       }
       LOGGER = new PrintWriter(new FileWriter(LOG_FILE.toFile()), true);
-    } catch (IOException e) {
+    } catch (final IOException e) {
       e.printStackTrace();
     }
   }

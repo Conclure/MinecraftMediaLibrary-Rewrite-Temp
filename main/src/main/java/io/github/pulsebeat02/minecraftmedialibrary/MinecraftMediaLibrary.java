@@ -12,6 +12,7 @@ import io.netty.channel.Channel;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.stream.Stream;
 import org.bukkit.entity.Player;
@@ -40,26 +41,32 @@ public final class MinecraftMediaLibrary implements MediaLibraryCore {
   private Path ffmpegExecutable;
   private boolean disabled;
 
+  MinecraftMediaLibrary(@NotNull final Plugin plugin) {
+    this(plugin, null, null, null, null, null, null, null, null, null);
+  }
+
   MinecraftMediaLibrary(
       @NotNull final Plugin plugin,
       @Nullable final LibraryLoader loader,
-      @NotNull final Path libraryPath,
-      @NotNull final Path dependencyPath,
-      @NotNull final Path httpServerPath,
-      @NotNull final Path vlcPath,
-      @NotNull final Path imagePath,
-      @NotNull final Path audioPath,
-      @NotNull final Path videoPath,
-      @NotNull final VideoPlayerOption option) {
+      @Nullable final Path libraryPath,
+      @Nullable final Path dependencyPath,
+      @Nullable final Path httpServerPath,
+      @Nullable final Path vlcPath,
+      @Nullable final Path imagePath,
+      @Nullable final Path audioPath,
+      @Nullable final Path videoPath,
+      @Nullable final VideoPlayerOption option) {
 
     this.plugin = plugin;
-    this.libraryPath = libraryPath;
-    this.dependencyPath = dependencyPath;
-    this.httpServerPath = httpServerPath;
-    this.vlcPath = vlcPath;
-    this.imagePath = imagePath;
-    this.audioPath = audioPath;
-    this.videoPath = videoPath;
+    this.libraryPath =
+        libraryPath == null ? plugin.getDataFolder().toPath().resolve("mml") : libraryPath;
+    this.dependencyPath = dependencyPath == null ? libraryPath.resolve("libs") : dependencyPath;
+    this.httpServerPath = httpServerPath == null ? libraryPath.resolve("http") : httpServerPath;
+    this.vlcPath = vlcPath == null ? dependencyPath.resolve("vlc") : vlcPath;
+    this.imagePath = imagePath == null ? libraryPath.resolve("image") : imagePath;
+    this.audioPath = audioPath == null ? libraryPath.resolve("audio") : audioPath;
+    this.videoPath = videoPath == null ? libraryPath.resolve("video") : videoPath;
+    this.option = option == null ? VideoPlayerOption.NOT_SPECIFIED : option;
 
     Stream.of(libraryPath, dependencyPath, httpServerPath, vlcPath, imagePath, audioPath, videoPath)
         .forEach(
@@ -71,7 +78,6 @@ public final class MinecraftMediaLibrary implements MediaLibraryCore {
 
     Logger.init(this);
 
-    this.option = option;
     this.registrationListener = new RegistrationListener(this);
     this.diagnostics = new SystemDiagnostics(this);
 
@@ -94,7 +100,11 @@ public final class MinecraftMediaLibrary implements MediaLibraryCore {
     }
 
     this.loader = loader == null ? new DependencyLoader(this) : loader;
-    this.loader.start();
+    try {
+      this.loader.start();
+    } catch (final ExecutionException | InterruptedException e) {
+      e.printStackTrace();
+    }
 
     PluginUsageTips.sendWarningMessage();
     PluginUsageTips.sendPacketCompressionTip();

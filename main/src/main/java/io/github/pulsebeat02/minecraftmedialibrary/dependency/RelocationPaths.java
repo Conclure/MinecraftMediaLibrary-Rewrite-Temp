@@ -4,6 +4,7 @@ import io.github.slimjar.relocation.RelocationRule;
 import org.jetbrains.annotations.NotNull;
 
 public enum RelocationPaths {
+
   VLCJ("uk{}co{}caprica{}vlcj", "io{}github{}pulsebeat02{}vlcj"),
   VLCJ_NATIVES("uk{}co{}caprica{}vlcj{}binding", "io{}github{}pulsebeat02{}vlcj{}binding"),
   VLCJ_NATIVE_STREAMS(
